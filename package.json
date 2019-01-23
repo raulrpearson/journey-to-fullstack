@@ -1,0 +1,32 @@
+{
+  "name": "journey-to-fullstack",
+  "private": true,
+  "description": "A journal, wiki, TODO registry of my effort to become a fullstack JavaScript developer",
+  "version": "0.1.0",
+  "author": "Raúl R. Pearson <raulrpearson@protonmail.com>",
+  "dependencies": {
+    "@mdx-js/mdx": "^0.16.6",
+    "@mdx-js/tag": "^0.16.6",
+    "gatsby": "^2.0.76",
+    "gatsby-mdx": "^0.3.5",
+    "gatsby-plugin-catch-links": "^2.0.9",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "npm run develop",
+    "format": "prettier --write \"src/**/*.js\""
+  },
+  "devDependencies": {
+    "prettier": "^1.15.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raulrpearson/journey-to-fullstack"
+  },
+  "bugs": {
+    "url": "https://github.com/raulrpearson/journey-to-fullstack/issues"
+  }
+}
