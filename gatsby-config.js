@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: '/journey-to-fullstack',
   siteMetadata: {
     title: 'Journey To Fullstack',
     description:
