@@ -37,3 +37,21 @@
 - Read and study Clean Code
 - Read and study The Pragmatic Programmer
 - Learn about CI tools and workflows
+
+### Git
+
+#### Understanding `upstream`
+
+GitHub tells you to use `git push -u origin master`. [This SO
+answer](https://stackoverflow.com/a/37770744) gives some insight into what
+upstream is and why that is required.
+
+Some of my takeaways:
+
+- An upstream is simply another branch name, usually a remote-tracking branch,
+  associated with a (regular, local) branch.
+- Each branch can have 0 or 1 upstream.
+- Setting an upstream is convenient becaues then many git commands can be used
+  without arguments to produce expected results (i.e. `fetch`, `merge`,
+  `rebase`, `pull`, `status`)
+- `push` = `fetch` followed by `merge` or `rebase`
