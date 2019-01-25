@@ -5,6 +5,12 @@
   "spellright.documentTypes": [
     "markdown",
     "latex",
-    "plaintext"
-  ]
+    "plaintext",
+    "mdx"
+  ],
+  "spellright.parserByClass": {
+    "mdx": {
+      "parser": "markdown"
+    }
+  }
 }
