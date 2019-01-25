@@ -1,0 +1,2 @@
+import React from 'react';
+export default props => <p>{props.text}</p>;
