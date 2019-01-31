@@ -20,6 +20,21 @@ developer
 
 ## Security
 
+- [This article](https://www.rdegges.com/2018/please-stop-using-local-storage/)
+  makes some good points agains using Local Storage for any sensitive
+  information, including JWTs used for authentication. It suggests a great
+  pattern for sensitive info storage (encrypted cookies). It also recommends
+  IndexedDB API to store non-sensitive non-stringy data in the browser. In
+  summary, only use Local Storage for non-sensitive, low performance, smaller
+  than 5MB string data.
+- Understand [cross-site
+  scripting](<https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)>)
+  attacks.
+- [OWASP](https://www.owasp.org/index.php/Main_Page) is a non-profit and online
+  community that produces freely-available articles, methodologies,
+  documentation, tools, and technologies in the field of web application
+  security.
+
 ## Web
 
 Check out the [general web section](/web)
