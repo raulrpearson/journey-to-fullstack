@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.0.118"/><link as="script" rel="preload" href="/journey-to-fullstack/webpack-runtime-7c2b563d2dfdb49b4f36.js"/><link as="script" rel="preload" href="/journey-to-fullstack/app-2df686b9c42a0a6e91c9.js"/><link as="script" rel="preload" href="/journey-to-fullstack/component---src-pages-programming-react-mdx-3de89e0c2322d6e9e060.js"/><link as="fetch" rel="preload" href="/journey-to-fullstack/static/d/27/path---programming-react-03-d-3d6-YV2xtnt8tPyAY05Un6wm26zkpgI.json" crossOrigin="use-credentials"/></head><body><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group"><style data-emotion-css="lnc4d1">*{font-family:sans-serif;line-height:1.1;}h1,h2,h3,h4,h5,h6{font-weight:normal;}pre{background:lightgray;overflow:scroll;padding:1em;}code{font-family:monospace;}</style><style data-emotion-css="1xi27x0">.css-1xi27x0{max-width:700px;margin:0 auto;}</style><main class="css-1xi27x0 eos24br0"><div><h1 id="react"><a href="#react" aria-label="react permalink" class="anchor"></a>React</h1><ul><li>Read through the <a href="https://reactjs.org/docs/getting-started.html">docs</a></li><li><a href="https://overreacted.io/">Dan Abramov&#x27;s blog</a> is amazing.</li><li>Build a CLI application using <a href="https://github.com/vadimdemedes/ink">Ink</a>.</li><li>Check out <a href="https://preactjs.com/">Preact</a>.</li></ul><h2 id="react-as-a-ui-runtime"><a href="#react-as-a-ui-runtime" aria-label="react as a ui runtime permalink" class="anchor"></a>React as a UI runtime</h2><p>Dan Abramov posted this <a href="https://overreacted.io/react-as-a-ui-runtime/">great overview of
+React</a>.</p><p>Some programs output numbers. Other programs output poems. Different languages
+and their runtimes are often optimized for a particular set of use cases, and
+React is no exception to that.</p><p><strong>React programs usually output a tree that may change over time</strong>. Let&#x27;s call
+this the host tree, because it&#x27;s part of the host environment, like DOM or iOS.
+It usually has it&#x27;s own imperative API (<code>appendChild()</code> in DOM, for example).</p><p>React can be more performant by assuming that the host tree is <em>stable</em> (not
+changing too much over time) and <em>regular</em> (can be broken down in components an
+patterns). In the case of most UIs, these reasonable assumptions are correct.</p><p>A <em>host instance</em> is a node in the <em>host tree</em>. Host instances have properties
+and can have other host instances as children. As mentioned above, there usually
+exists an API to manipulate these host instances.</p><p>A <em>renderer</em> teaches React to talk to a specific host environment and manage its
+host instances. React renderers can work in <em>mutating</em> or <em>persistent</em> mode.
+Mutating mode is what you&#x27;d expect and persistent mode is for host environments
+that don’t provide methods like <code>appendChild()</code> but instead clone the parent
+tree and always replace the top-level child.</p><p>In the host environment, a host instance (like a DOM node) is the smallest
+building block. In React, the smallest building block is a <em>React element</em>.
+React element is a plain JavaScript object:</p><pre><code class="language-javascript">// JSX is a syntax sugar for these objects.
+// &lt;button className=&quot;blue&quot; /&gt;
+{
+  type: &#x27;button&#x27;,
+  props: { className: &#x27;blue&#x27; }
+}
+</code></pre><p>A React element is lightweight and has no host instance tied to it. Again, it is
+merely a description of what you want to see on the screen. They are immutable.
+If you want to render something different later, you will describe it with a new
+React element tree created from scratch. They are like frames in a movie.</p><p>Each React renderer has an <em>entry point</em>. It’s the API that lets us tell React
+to render a particular React element tree inside a container host instance. For
+example, in React DOM:</p><pre><code class="language-jsx">ReactDOM.render(
+  // { type: &#x27;button&#x27;, props: { className: &#x27;blue&#x27; } }
+  &lt;button className=&quot;blue&quot; /&gt;,
+  document.getElementById(&#x27;container&#x27;)
+);
+</code></pre><h2 id="gatsby"><a href="#gatsby" aria-label="gatsby permalink" class="anchor"></a>Gatsby</h2><ul><li>Project: build a site <a href="https://www.npmjs.com/package/gatsby-source-google-sheets">sourcing from google
+sheets</a></li></ul></div></main></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.page={"componentChunkName":"component---src-pages-programming-react-mdx","jsonName":"programming-react-03d","path":"/programming/react/"};window.dataPath="27/path---programming-react-03-d-3d6-YV2xtnt8tPyAY05Un6wm26zkpgI";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-2df686b9c42a0a6e91c9.js"],"component---src-pages-programming-mdx":["/component---src-pages-programming-mdx-68873075e8042388ac4f.js"],"component---src-pages-ai-mdx":["/component---src-pages-ai-mdx-f4bf4ef986b6ade73681.js"],"component---src-pages-index-mdx":["/component---src-pages-index-mdx-42740adbc22409f52876.js"],"component---src-pages-programming-react-mdx":["/component---src-pages-programming-react-mdx-3de89e0c2322d6e9e060.js"],"component---src-pages-software-engineering-mdx":["/component---src-pages-software-engineering-mdx-8c6430613b12af2a87bd.js"],"component---src-pages-tools-mdx":["/component---src-pages-tools-mdx-b7a758f2988056168a2d.js"],"component---src-pages-web-mdx":["/component---src-pages-web-mdx-bc832411e4ce02c61c15.js"],"component---src-pages-programming-general-javascript-mdx":["/component---src-pages-programming-general-javascript-mdx-6d9c81d828c8fe7481ac.js"],"pages-manifest":["/pages-manifest-d6bf5ad21124e7410470.js"]};/*]]>*/</script><script src="/journey-to-fullstack/component---src-pages-programming-react-mdx-3de89e0c2322d6e9e060.js" async=""></script><script src="/journey-to-fullstack/app-2df686b9c42a0a6e91c9.js" async=""></script><script src="/journey-to-fullstack/webpack-runtime-7c2b563d2dfdb49b4f36.js" async=""></script></body></html>
