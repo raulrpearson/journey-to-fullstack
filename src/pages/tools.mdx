@@ -1,4 +1,4 @@
-## Tools
+# Tools
 
 - [GitHub courses](https://lab.github.com/courses)
 - [mkcert](https://blog.filippo.io/mkcert-valid-https-certificates-for-localhost/)
@@ -6,7 +6,7 @@
 - fish
 - Practice [Emmet](https://docs.emmet.io/cheat-sheet/)
 
-### vim
+## vim
 
 - [vimcasts](http://vimcasts.org/episodes/tabs-and-spaces/)
 - Understand [indentation and tabs](http://vimcasts.org/episodes/tabs-and-spaces/)
@@ -16,34 +16,42 @@
   - shiftwidth: amount of ws to insert or remove using indentation
 - commands in normal mode
 
-### VS Code
+## VS Code
 
-### Browser Devtools
+- Pair programming with [VS Live
+  Share](https://visualstudio.microsoft.com/services/live-share/)
+
+## Browser Devtools
 
 - [Youtube](https://www.youtube.com/channel/UCwktrTEq-dC49H1NGAC0dWQ)
 - [Site](https://umaar.com/dev-tips/)
 
-### nnn
+## nnn
 
 - [Usage](https://github.com/jarun/nnn#usage)
 
-### tmux
+## tmux
 
 - [Crash course](https://robots.thoughtbot.com/a-tmux-crash-course)
 - [tmux.conf](https://gist.githubusercontent.com/spicycode/1229612/raw/e24eac21b20020b0cce10020e979ec0a142a356c/tmux.conf)
 - [The Tao of tmux](https://leanpub.com/the-tao-of-tmux/read)
 
-### Daily practice
+## Daily practice
 
 - Read and study Clean Code
 - Read and study The Pragmatic Programmer
 - Learn about CI tools and workflows
 
-### Git
+## Version control
 
 - Understand and write about Git flows and GitHub pull requests
 
-#### Understanding `upstream`
+- [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0-beta.3/)
+
+- Great article about [code
+  maintenance](https://hackernoon.com/these-6-essential-tools-will-maintain-your-npm-modules-for-you-4cbbee88e0cb)
+
+### Understanding `upstream`
 
 GitHub tells you to use `git push -u origin master`. [This SO
 answer](https://stackoverflow.com/a/37770744) gives some insight into what
@@ -59,6 +67,59 @@ Some of my takeaways:
   `rebase`, `pull`, `status`)
 - `push` = `fetch` followed by `merge` or `rebase`
 
-### npm
+## npm
 
 - Understand and write about npm, npx, ncu, package.json, etc.
+
+## Resources and assets
+
+- Open-source illustrations at [Undraw](https://undraw.co/)
+- [Unicons](https://iconscout.com/unicons)
+- [Wes' background pattern
+  resources](https://twitter.com/wesbos/status/1093167287119609858)
+
+## Bundlers
+
+In the context of web applications, bundlers are tools that transform your
+source files to make them optimized for deployment. I think that mainly means
+smaller size and less network requests, but it also includes things like
+managing the transformation of things like SASS (good to have in development)
+into CSS (required in deployment).
+
+These are some popular bundlers:
+
+- [Webpack](https://webpack.js.org/)
+- [Parcel](https://parceljs.org/)
+- [Browserify](http://browserify.org/)
+- [Rollup](https://rollupjs.org/)
+
+Here's a
+[comparison](https://medium.com/js-imaginea/comparing-bundlers-webpack-rollup-parcel-f8f5dc609cfd)
+of Webpack, Parcel and Rollup. I'm currently debating myself between Webpack and
+Parcel. Webpack is everywhere, but Parcel seems to provide a better DX. I think
+I'll try to focus on Parcel for now and be ready to move to Webpack depending of
+how they both evolve.
+
+Some of the features to understand bundlers:
+
+- Configuration. I honestly don't see what the big deal is, but it is nice to
+  have as zero-config as possible. It seems Parcel provides the lowest config
+  requirement.
+
+- Entry points. Where does the bundler start parsing to do it's thing. I like
+  that parcel provides an `index.html` entry point out of the box.
+
+- Transformations. SASS to CSS, for example. Added with plugins. Again, Parcel
+  seems to handle the most without plugins.
+
+- Tree shaking. Eliminating dead code. Not supported by Parcel yet.
+
+- Dev server. Watching for changes to your source files and automatically
+  rebuilding your bundles.
+
+- Hot Module Replacement (HMR). Being able to reload parts of your running app
+  without having to reload the whole app. Speeds up development.
+
+- Code splitting. Creating bundles that are broken up into different parts.
+  Improves UX by requiring a smaller initial download. The user can start using
+  the app while the rest of it is being fetched in the background.
