@@ -1,0 +1,68 @@
+# React
+
+- Read through the [docs](https://reactjs.org/docs/getting-started.html)
+- [Dan Abramov's blog](https://overreacted.io/) is amazing.
+- Build a CLI application using [Ink](https://github.com/vadimdemedes/ink).
+- Check out [Preact](https://preactjs.com/).
+
+## React as a UI runtime
+
+Dan Abramov posted this [great overview of
+React](https://overreacted.io/react-as-a-ui-runtime/).
+
+Some programs output numbers. Other programs output poems. Different languages
+and their runtimes are often optimized for a particular set of use cases, and
+React is no exception to that.
+
+**React programs usually output a tree that may change over time**. Let's call
+this the host tree, because it's part of the host environment, like DOM or iOS.
+It usually has it's own imperative API (`appendChild()` in DOM, for example).
+
+React can be more performant by assuming that the host tree is _stable_ (not
+changing too much over time) and _regular_ (can be broken down in components an
+patterns). In the case of most UIs, these reasonable assumptions are correct.
+
+A _host instance_ is a node in the _host tree_. Host instances have properties
+and can have other host instances as children. As mentioned above, there usually
+exists an API to manipulate these host instances.
+
+A _renderer_ teaches React to talk to a specific host environment and manage its
+host instances. React renderers can work in _mutating_ or _persistent_ mode.
+Mutating mode is what you'd expect and persistent mode is for host environments
+that don’t provide methods like `appendChild()` but instead clone the parent
+tree and always replace the top-level child.
+
+In the host environment, a host instance (like a DOM node) is the smallest
+building block. In React, the smallest building block is a _React element_.
+React element is a plain JavaScript object:
+
+```javascript
+// JSX is a syntax sugar for these objects.
+// <button className="blue" />
+{
+  type: 'button',
+  props: { className: 'blue' }
+}
+```
+
+A React element is lightweight and has no host instance tied to it. Again, it is
+merely a description of what you want to see on the screen. They are immutable.
+If you want to render something different later, you will describe it with a new
+React element tree created from scratch. They are like frames in a movie.
+
+Each React renderer has an _entry point_. It’s the API that lets us tell React
+to render a particular React element tree inside a container host instance. For
+example, in React DOM:
+
+```jsx
+ReactDOM.render(
+  // { type: 'button', props: { className: 'blue' } }
+  <button className="blue" />,
+  document.getElementById('container')
+);
+```
+
+## Gatsby
+
+- Project: build a site [sourcing from google
+  sheets](https://www.npmjs.com/package/gatsby-source-google-sheets)

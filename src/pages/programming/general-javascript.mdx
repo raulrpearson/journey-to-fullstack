@@ -1,0 +1,181 @@
+# General JavaScript
+
+## Glossary of concepts
+
+- Understand [isomorphic and
+  universal](https://medium.com/@ghengeveld/isomorphism-vs-universal-javascript-4b47fb481beb)
+  apps. Universal = run everywhere, isomorphic = server rendered for faster
+  initial render on the client.
+
+- Memoization
+
+- Strict mode
+
+- [Async](https://dev.to/kartik2406/async-operations-in-javascript-1k2c)
+
+- [Nodeschool.io](https://nodeschool.io/)
+
+## JavaScript frameworks
+
+- [Hyperapp](https://github.com/jorgebucaran/hyperapp/), 1kB JavaScript
+  micro-framework for building declarative web applications.
+
+## A review of ES6
+
+This section has my notes from [ES6 For Everyone](https://es6.io/) with things
+added whenever my curiosity pulled me into going a bit deeper.
+
+### A bit of history
+
+[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript) is a scripting language
+_specification_ of which JavaScript is the most popular _implementation_ (other
+implementations are JScript, ActionScript and Google Apps Script).
+
+The ES6 is ECMAScript version 6, published in June 2015. It seems that since
+then, Ecma International has released a [new version every
+June](https://en.wikipedia.org/wiki/ECMAScript#Versions), so in June 2018 we had
+ES9.
+
+If you've got time, Auth0 did a nice review of [JavaScript
+history](https://auth0.com/blog/a-brief-history-of-javascript/):
+
+- In the early days, Netscape, founded by Marc Andreessen, wanted to add dynamic
+  features to the web. They came up with Mocha, which was to become a scripting
+  language for the web. Simple, dynamic, and accessible to non-developers.
+
+- They brought in Brendan Eich with the promise of developing "Scheme for the
+  browser" (a dialect of [Lisp](http://landoflisp.com/)). Time pressure, the
+  rising popularity of Java and Netscape's relationship with Sun Microsystems
+  ended in "a premature lovechild of Scheme and Self, with Java looks".
+
+- The Mocha prototype was integrated into Netscape in May 1995 and renamed
+  LiveScript until December 1995 when it settled on JavaScript.
+
+- JavaScript made such a considerable difference in user experience that
+  competing browsers had no choice but to come up with a working solution, a
+  working implementation of JavaScript.
+
+- Microsoft called theirs JScript. The first version of JScript was included
+  with Internet Explorer 3.0, released in August 1996.
+
+- Brendan Eich rewrote Mocha to clean up the mess produced by the rushed
+  release. The JavaScript engine in Netscape was named
+  [SpiderMonkey](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey),
+  and that has been carried over to Firefox to this day
+  ([Mozilla](https://en.wikipedia.org/wiki/Mozilla) came out of Netscape).
+
+- [Brendan Eich](https://brendaneich.com/2008/04/popularity/): "I’m happy that I
+  chose Scheme-ish first-class functions and Self-ish (albeit singular)
+  prototypes as the main ingredients. The Java influences, especially y2k Date
+  bugs but also the primitive vs. object distinction (e.g., string vs. String),
+  were unfortunate."
+
+- Ecma International is an industry association formed in 1961 concerned solely
+  with standardization of information and communications systems.
+
+- Work on the standard for JavaScript was started in November 1996. The
+  identification for the standard was ECMA-262 and the committee in charge was
+  TC-39.
+
+- The second version of the standard, ECMAScript 2, was released to fix
+  inconsistencies between ECMA and the ISO standard for JavaScript (ISO/IEC
+  16262), so no changes to the language were part of it. It was released in June 1998.
+
+- AJAX, asynchronous JavaScript and XML, was a technique that was born in the
+  years of ECMAScript 3. Although it was not part of the standard, Microsoft
+  implemented certain extensions to JavaScript for its Internet Explorer 5
+  browser. One of them was the `XMLHttpRequest` function (in the form of the
+  XMLHTTP ActiveX control). This function allowed a browser to perform an
+  asynchronous HTTP request against a server, thus allowing pages to be updated
+  on-the-fly. Although the term AJAX was not coined until years later, this
+  technique was pretty much in place.
+
+- Work on ECMAScript 4 was fraught with strong differences within the committee.
+  Some wanted to add big changes and features that would make JS more powerful,
+  others thought that shouldn't be the path for JS. The work became so big and
+  stretched out that ES4 was abandoned.
+
+- If you are already familiar with ECMAScript 6/2015 you will notice that many
+  features from ECMAScript 4 were reintroduced in it.
+
+- All in all, ECMAScript 4 took almost 8 years of development and was finally
+  scrapped. Adobe was in favor of many of the features that were included in ES4
+  and they created ActionScript implementing those.
+
+- In the year 2009 ECMAScript 3.1 was completed and signed-off by all involved
+  parties. ECMAScript 4 was already recognized as a specific variant of
+  ECMAScript even without any proper release, so the committee decided to rename
+  ECMAScript 3.1 to ECMAScript 5 to avoid confusion.
+
+- All-in-all, ECMAScript 5 was a modest improvement that helped JavaScript
+  become a more usable language, for both small scripts, and bigger projects.
+  Still, there were many good ideas from ECMAScript 4 that got scrapped and
+  would see a return through the ECMAScript Harmony proposal.
+
+- The ECMAScript Harmony proposal became a hub for future improvements to
+  JavaScript. Many ideas from ECMAScript 4 were cancelled for good, but others
+  were rehashed with a new mindset. ECMAScript 6, later renamed to ECMAScript
+  2015, was slated to bring big changes.
+
+- The release of ECMAScript 2015 caused a big jump in the use of transpilers
+  such as Babel or Traceur. Even before the release, as these transpilers
+  tracked the progress of the technical committee, people were already
+  experiencing many of the benefits of ECMAScript 2015.
+
+- A new release process implemented by TC-39. All new proposals must go through
+  a four stage process. Every proposal that reaches stage 4 has a strong chance
+  of getting included in the next version of ECMAScript (though the committee
+  may still opt to push back its inclusion). This way proposals are developed
+  almost on their own (though interaction with other proposals must be taken
+  into account). Proposals do not stop the development of ECMAScript. If a
+  proposal is ready for inclusion, and enough proposals have reached stage 4, a
+  new ECMAScript version can be released.
+
+### `var`, `let`, `const`
+
+- Scope: `var` is function scoped, `let` and `const` are block scoped, which is
+  more restrictive.
+
+- `var`s can be redeclared, even if it's not clear why you'd do that.
+
+- Using `let` to redeclare a variable is not allowed in general, but inside a
+  narrower scope it is.
+
+- Using `const` on objects means the object shape cannot change, but the value
+  of it's fields can. On arrays I'm not sure what it provides, probably that it
+  has to remain an Array object. I can edit, add and remove elements from the
+  `const` array. `Object.freeze()` can be used to make an object immutable.
+
+- Before `let` and `const`, people used
+  [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)'s to limit the
+  scope of `var`s. Now, you can just use `let` or `const` inside a curly
+  brackets `{ ... }`
+
+- These pieces of code illustrate more advantages of `let` vs `var`. After 5
+  seconds, this will print out 'Number is 10' ten times:
+
+```javascript
+for (var i = 0; i < 10; i += 1) {
+  console.log(i);
+  setTimeout(() => console.log(`Number is ${i}`), 5000);
+}
+```
+
+Versus this, which will print out 'Number is 1', 'Number is 2', etc.
+
+```javascript
+for (let i = 0; i < 10; i += 1) {
+  console.log(i);
+  setTimeout(() => console.log(`Number is ${i}`), 5000);
+}
+```
+
+- `let` and `const` also solve the temporal dead zone. I.e. they will throw an
+  error if you reference them before declaring them. `var`s on the other hand,
+  return undefined in that scenario.
+
+- [Is `var` dead?](https://wesbos.com/is-var-dead/). My takeaway: use `const` by
+  default, `let` when you need rebinding, don't use `var`.
+
+- Three main benefits from arrow functions: conciseness, implicit return, no
+  rebinding of `this`.
