@@ -1,4 +1,11 @@
+---
+title: 'General Javascript'
+---
+
 # General JavaScript
+
+- ECMAScript [compatibility table](https://kangax.github.io/compat-table/es6/)
+- [2ality](http://2ality.com/)
 
 ## Glossary of concepts
 
@@ -7,13 +14,29 @@
   apps. Universal = run everywhere, isomorphic = server rendered for faster
   initial render on the client.
 
-- Memoization
+- [Memoization](https://codeburst.io/understanding-memoization-in-3-minutes-2e58daf33a19)
 
-- Strict mode
+- [Strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
 
 - [Async](https://dev.to/kartik2406/async-operations-in-javascript-1k2c)
 
-- [Nodeschool.io](https://nodeschool.io/)
+- [Named vs anonymous functions](https://www.linkedin.com/pulse/javascript-named-vs-anonymous-functions-chris-ng)
+
+- [Currying](http://2ality.com/2011/09/currying-vs-part-eval.html) and partial
+  application are two ways of transforming a function into another function with a
+  generally smaller _arity_ (number of arguments). Currying always produces
+  nested unary (1-ary) functions. The transformed function is still largely the
+  same as the original. Partial application produces functions of arbitrary
+  arity. The transformed function is different from the original – it needs less
+  arguments. Interesting point of view in "[Currying is not idiomatic in
+  JavaScript](http://2ality.com/2017/11/currying-in-js.html)". Currying is a
+  technique for transforming functions so that they help with partial
+  application.
+
+- A [closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
+  is the combination of a function and the lexical environment within which that
+  function was declared. This environment consists of any local variables that
+  were in-scope at the time the closure was created.
 
 ## JavaScript frameworks
 
@@ -23,7 +46,8 @@
 ## A review of ES6
 
 This section has my notes from [ES6 For Everyone](https://es6.io/) with things
-added whenever my curiosity pulled me into going a bit deeper.
+added whenever my curiosity pulled me into going a bit deeper. Another good
+guide of [ES6 features](https://auth0.com/blog/a-rundown-of-es6-features/) provided by Auth0.
 
 ### A bit of history
 
@@ -131,7 +155,7 @@ history](https://auth0.com/blog/a-brief-history-of-javascript/):
   proposal is ready for inclusion, and enough proposals have reached stage 4, a
   new ECMAScript version can be released.
 
-### `var`, `let`, `const`
+### Variables (`var`, `let`, `const`)
 
 - Scope: `var` is function scoped, `let` and `const` are block scoped, which is
   more restrictive.
@@ -177,5 +201,51 @@ for (let i = 0; i < 10; i += 1) {
 - [Is `var` dead?](https://wesbos.com/is-var-dead/). My takeaway: use `const` by
   default, `let` when you need rebinding, don't use `var`.
 
+### Functions
+
 - Three main benefits from arrow functions: conciseness, implicit return, no
   rebinding of `this`.
+
+- Implicit returns cannot be surrounded by curly braces. To return an object
+  literal, which is surrounded by curly braces, you can wrap it in parenthesis.
+
+- Arrow functions inside other functions don't rebind `this`, they inherit it
+  from the parent. This makes them suited for certain cases, unsuited for
+  others. For example:
+
+```javascript
+const box = document.querySelector('.box');
+box.addEventListener('click', function() {
+  // Regular function required for `this` to be `box`
+  this.classList.toggle('opening');
+  // Arrow function required for `this` to be `box`
+  setTimeout(() => this.classList.toggle('opening'), 500);
+});
+```
+
+- Be careful about using arrow functions whenever you want to use `this`. Some
+  cases are inside functions, objects and prototype methods. They also don't
+  provide access to the `arguments` object.
+
+- You can do `function foo(a, b = 2, c = 3)` to pass default values for certain
+  arguments. You can call this like `foo(1)`, `foo(1, 1)` and `foo(1, undefined, 1)`
+
+### Template literals
+
+- Template literals are string literals that accept embedded expressions and
+  multi-line strings.
+
+- [Tagged
+  templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates)
+  allow you to parse template literals with a function. The function signature
+  for a tag would be `function myTag(strings, arg0, arg1)` or `function myTag(strings, ...args)` for an unknown number of arguments.
+
+- Aside: you can use the
+  [`debugger`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger)
+  statement to invoke any
+  available debugging functionality, such as setting a breakpoint. If no
+  debugging functionality is available, this statement has no effect.
+
+- Consider sanitizing tagged templates with [DOMPurify](https://github.com/cure53/DOMPurify).
+
+<!-- Stopped at 17. String Methods -->
