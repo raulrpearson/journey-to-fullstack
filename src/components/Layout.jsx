@@ -11,6 +11,10 @@ const StyledLayout = styled.div`
   margin: 2em 1em;
 `;
 
+const StyledArticle = styled.article`
+  min-width: 300px;
+`;
+
 // This will be the result of a query eventually, once I've figured out how to
 // do a query with $id and pass that data into the component through props
 const headings = [
@@ -40,7 +44,7 @@ const Layout = props => (
       `}
     />
     <SiteToc />
-    <main>{props.children}</main>
+    <StyledArticle>{props.children}</StyledArticle>
     <PageToc headings={headings} />
   </StyledLayout>
 );
