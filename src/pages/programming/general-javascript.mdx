@@ -248,4 +248,128 @@ box.addEventListener('click', function() {
 
 - Consider sanitizing tagged templates with [DOMPurify](https://github.com/cure53/DOMPurify).
 
-<!-- Stopped at 17. String Methods -->
+### Mixed bag
+
+- New string methods: `startsWith`, `endsWith`, `includes` and `repeat`. Avoids
+  having to reach for regular expressions in some use cases. Wes showcases a nifty
+  use of `repeat` for a left padding function that right aligns text:
+
+```javascript
+function leftPad(str, length = 20) {
+  return `${' '.repeat(length - str.length)}${str}`;
+}
+```
+
+### Destructuring
+
+```javascript
+// Assigning values to custom named variables
+const { twitter: tw, facebook: fb } = wes.links.social;
+
+// Using defaults
+const settings = { width: 300, color: 'black' };
+const { width = 100, height = 100, color = 'blue', fontSize = 25 } = settings;
+
+// Destructuring arrays with rest
+const team = ['Wes', 'Harry', 'Sarah', 'Keegan', 'Riker'];
+const [captain, assistant, ...players] = team;
+
+// Switching values
+let inRing = 'Hulk Hogan';
+let onSide = 'The Rock';
+[inRing, onSide] = [onSide, inRing];
+
+// Named arguments and default values for functions
+function tipCalc({ total = 100, tip = 0.15, tax = 0.13 } = {}) {
+  return total + tip * total + tax * total;
+}
+console.log(tipCalc());
+console.log(tipCalc({ tip: 0.1, total: 80 }));
+```
+
+### `for` loops
+
+- The `for` loops available in JavaScript are: regular `for`, `forEach` method
+  available on Arrays and other objects, `for...in` and `for...of`. This last
+  one seems to be the best - it provides readable syntax, `break` and `continue`
+  support and works with everything except objects.
+
+```javascript
+for (const cut of cuts) {
+  if (cut === 'Brisket') {
+    continue;
+  }
+  console.log(cut);
+}
+```
+
+- [Array.entries()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
+  returns an Array iterator that can be used with the `for...of` loop.
+
+- The recommended approach to iterate over objects is to use `for...in` or
+  `for...of` with the `Object.entries()` method.
+
+- Another strategy is to convert _arrayish_ things into arrays using
+  `Array.from()` and `Array.of()`.
+
+### Array methods
+
+- `find` and `findIndex`
+
+- The spread operator is useful for concatenating and cloning arrays:
+
+```javascript
+const pizzas = [...featured, 'veg', ...specialty];
+const fridayPizzas = [...pizzas];
+// fridayPizzas = pizzas creates a new reference to the same
+// array in memory, not a new array
+```
+
+### Object literal upgrades
+
+You don't need to specify `property: variable` when `variable` has the same name
+as `property`. Same goes for functions. Also, object keys can now be generated
+dynamically using template strings.
+
+```javascript
+const first = 'snickers';
+const last = `bos`;
+const age = 2;
+const breed = 'King Charles Cav';
+const dog = {
+  firstName: first,
+  last,
+  age,
+  breed,
+  pals: ['Hugo', 'Sunny']
+};
+
+const modal = {
+  create(selector) {
+    /* body */
+  },
+  open(content) {
+    /* body */
+  },
+  close(goodbye) {
+    /* body */
+  }
+};
+
+const invertColor = color => `#cccccc`;
+
+const key = 'pocketColor';
+const value = '#ffc600';
+const tShirt = {
+  [key]: value,
+  [`${key}Opposite`]: invertColor(value)
+};
+```
+
+### Promises
+
+### Generators
+
+### Proxies
+
+### Sets
