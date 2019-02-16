@@ -16,6 +16,8 @@ const StyledList = styled.ul`
   margin-left: 0;
   & > li {
     text-transform: uppercase;
+    font-family: 'Avenir Next';
+    font-weight: bold;
   }
   a {
     text-decoration: none;
