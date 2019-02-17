@@ -3,6 +3,7 @@ import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import PageToc from './PageToc';
 import SiteToc from './SiteToc';
+import GitHubCorner from './GitHubCorner';
 
 const StyledLayout = styled.div`
   display: grid;
@@ -33,20 +34,25 @@ const headings = [
 ];
 
 const Layout = props => (
-  <StyledLayout>
-    <Global
-      styles={css`
-        pre {
-          background: lightgray;
-          overflow: scroll;
-          padding: 1em;
-        }
-      `}
+  <>
+    <GitHubCorner
+      url={`https://github.com/raulrpearson/journey-to-fullstack`}
     />
-    <SiteToc />
-    <StyledArticle>{props.children}</StyledArticle>
-    <PageToc headings={headings} />
-  </StyledLayout>
+    <StyledLayout>
+      <Global
+        styles={css`
+          pre {
+            background: lightgray;
+            overflow: scroll;
+            padding: 1em;
+          }
+        `}
+      />
+      <SiteToc />
+      <StyledArticle>{props.children}</StyledArticle>
+      <PageToc headings={headings} />
+    </StyledLayout>
+  </>
 );
 
 export default Layout;
