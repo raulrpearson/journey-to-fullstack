@@ -35,6 +35,7 @@ const SiteToc = () => (
         allMdx {
           edges {
             node {
+              id
               fields {
                 title
                 slug
@@ -47,11 +48,18 @@ const SiteToc = () => (
     render={data => (
       <StyledAside>
         <StyledList>
-          {data.allMdx.edges.map(({ node: { fields: { title, slug } } }) => (
-            <li>
-              <Link to={slug}>{title}</Link>
-            </li>
-          ))}
+          {data.allMdx.edges.map(
+            ({
+              node: {
+                id,
+                fields: { title, slug }
+              }
+            }) => (
+              <li key={id}>
+                <Link to={slug}>{title}</Link>
+              </li>
+            )
+          )}
         </StyledList>
       </StyledAside>
     )}
