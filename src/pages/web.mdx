@@ -20,3 +20,142 @@
 - Solid, inrupt
 - Zcoin
 - Beaker browser and company
+
+## Loading fonts
+
+To read: [Web Font
+Optimization](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/webfont-optimization).
+
+[This
+article](https://medium.com/clio-calliope/making-google-fonts-faster-aadf3c02a36d)
+gives a great overview of strategies to improve the loading of Google Fonts.
+Some of the tips apply to fonts in general.
+
+We typically load Google Fonts by adding this piece of markup:
+
+```html
+<link
+  href="https://fonts.googleapis.com/css?family=Muli:400"
+  rel="stylesheet"
+/>
+```
+
+That returns a stylesheet full of `@font-face` declarations like this one:
+
+```css
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Muli Regular'), local('Muli-Regular'),
+    url(https://fonts.gstatic.com/s/muli/v12/7Auwp_0qiz-afTzGLQjUwkQ1OQ.woff2)
+      format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+```
+
+This tries to load fonts locally if they're available, before going to
+`fonts.gstatic.com`. That's not too bad, specially considering that Google's
+severs are good, but we have a couple of problems with this approach:
+
+1. We're performing a minimum of 2 separate requests to different hosts -
+   first for the stylesheet at `fonts.googleapis.com`, and then to a unique URL
+   for each font hosted at `fonts.gstatic.com`.
+
+2. We have no control over flash-of-invisible-text (FOIT) and
+   flash-of-unstyled-text (FOUT) while fonts are loading. Setting the
+   `font-display` property in the `@font-face` would give us that control, but
+   it’s defined in the Google Fonts stylesheet.
+
+3. Finally, while rare, if Google Fonts is down, we won’t get our fonts. If our
+   own CDN is down, then at least we are consistently delivering nothing to our
+   users, right?
+
+Two strategies are suggested. At the very least, warm up the DNS lookup, TCP
+handshake, and TLS negotiation to `fonts.gstatic.com` with `preconnect`:
+
+```html
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css?family=Muli:400"
+  rel="stylesheet"
+/>
+```
+
+Alternatively, self-host. Use
+[google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts) and
+follow instructions.
+
+“Modern Browsers” will give you WOFF and WOFF2 formats while “Best Support” will
+also give you TTF, EOT, and SVG. A reasonable option is to chose to only host
+WOFF and WOFF2 while selecting system fonts as fallbacks for older browsers.
+
+In your pages, use `preload` for fonts that you're sure you'll be using:
+"Preload is a declarative fetch, allowing you to force the browser to make a
+request for a resource without blocking the document’s onload event." ([Preload,
+Prefetch And Priorities in
+Chrome](https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf)).
+
+All the browsers that support `preload` also support WOFF2 so we can safely
+choose only WOFF2.
+
+```html
+<link
+  rel="preload"
+  as="font"
+  type="font/woff2"
+  href="./fonts/muli-v12-latin-regular.woff2"
+  crossorigin
+/>
+
+<link
+  rel="preload"
+  as="font"
+  type="font/woff2"
+  href="./fonts/muli-v12-latin-700.woff2"
+  crossorigin
+/>
+```
+
+- `rel="preload"` tells the browser to declaratively fetch the resource but not
+  “execute” it (our CSS will queue usage).
+
+- `as="font"` tells the browser what it will be downloading so that it can set
+  an appropriate priority. Without it, the browser would set a default low
+  priority.
+
+- `type="font/woff2` tells the browser the file type so that it only downloads
+  the resource if it supports that file type.
+
+- `crossorigin` is required because fonts are fetched using anonymous mode CORS.
+
+If you’re okay with FOUT, or flash of unstyled text, then we can fix FOIT by
+adding `font-display: swap;` to our `@font-face` declarations. More info in [this
+glitch](https://font-display.glitch.me/). It explains the use of the
+`font-display` property:
+
+- Font loading follows three stages: block, swap, failure.
+
+- `font-display` is applied per font-face.
+
+- `font-display: block` produces FOIT but is good in cases where your font
+  branding is important and you don't want people to see you site with fallback
+  fonts.
+
+- `font-display: swap` produces FOUT, the text is shown immediately in the
+  fallback font until the custom font loads.
+
+- `font-display: fallback` somewhere in between block and swap. The text is
+  invisible for a short period of time (100ms). Then if the custom font hasn't
+  downloaded, the text is shown in a fallback font (for about 3s), then swapped
+  after the custom font loads.
+
+- `font-display: optional` like fallback but the browser can decide to not use
+  the custom font at all, based on the user's connection speed.
+
+[subfont](https://github.com/Munter/subfont) is a command line tool to optimize
+your webfont loading. Aggressive subsetting based on your font use, self-hosting
+of Google fonts and preloading. If you're cool, you use Gatsby and life's good:
+there's [a plugin for
+that](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-subfont).
