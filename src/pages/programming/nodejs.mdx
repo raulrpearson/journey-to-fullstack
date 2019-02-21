@@ -1,0 +1,78 @@
+---
+title: 'Node.js'
+---
+
+export const Heading = ({ text }) => <h1>{text}</h1>;
+
+<Heading text={props.pageContext.frontmatter.title} />
+
+## Environment variables
+
+[This
+article](https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786)
+makes a case for environment variables.
+
+### Why?
+
+Because they externalize all environment specific aspects of your app and
+keep your app encapsulated. Now you can run your app anywhere by modifying the
+environment variables _without changing your code and without rebuilding it_!
+
+### When?
+
+Some examples:
+
+- Which HTTP port to listen on
+- What path and folder your files are located in, that you want to serve
+- Pointing to a development, staging, test, or production database
+- URLs to server resources
+- CDNs for testing vs. production
+- Even a marker to label your app in the UI by the environment it lives in
+
+### How?
+
+- Using the local environment (duh) and/or command line. We're talking about
+  _environment_ variables, after all. They could be present in memory as part of
+  the execution context or you can pass them through the command line. Assuming
+  you use bash:
+
+```bash
+PORT=8626 node server.js
+```
+
+- Using .env file. Keeps things tidy and convenient and avoids typing mistakes.
+  I also think the previous solution has a higher risk of leaking data to the
+  environment. When you add a variable to bash, other processes might be able to
+  access that value. When you use dotenv, I think the variables are attached to
+  your application process and can only be seen by it.
+
+In any case, just use dotenv. Add your `.env` file to your `.gitignore` and you
+also have a convenient way of keeping your secrets accessible and (somewhat)
+protected.
+
+Read the [dotenv docs](https://www.npmjs.com/package/dotenv) for details on how
+to use it. I've seen two different ways of accessing values:
+
+1. Using the dot notation: `process.env.PORT`
+2. Using the bracket notation: `process.env['PORT']`
+
+I'm assuming they're equivalent and who cares, but I like bracket notation
+better. It would make it easier to use them programmatically like this:
+
+```javascript
+const keys = ['PORT', 'ENDPOINT', 'SECRET'];
+for (key of keys) {
+  let value = process.env[key];
+  // do something with value
+}
+```
+
+For consistency, why not use that notation everywhere.
+
+Also follow the recommendation of a single .env file per environment. From [The
+Twelve-Factor App](http://12factor.net/config):
+
+> In a twelve-factor app, env vars are granular controls, each fully orthogonal
+> to other env vars. They are never grouped together as “environments”, but
+> instead are independently managed for each deploy. This is a model that scales
+> up smoothly as the app naturally expands into more deploys over its lifetime.
