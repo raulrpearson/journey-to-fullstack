@@ -42,7 +42,7 @@ const Layout = props => (
       <Global
         styles={css`
           pre {
-            background: lightgray;
+            background: #f2f2f2;
             overflow: scroll;
             padding: 1em;
           }
