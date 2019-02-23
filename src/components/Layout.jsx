@@ -33,26 +33,29 @@ const headings = [
   }
 ];
 
-const Layout = props => (
-  <>
-    <GitHubCorner
-      url={`https://github.com/raulrpearson/journey-to-fullstack`}
-    />
-    <StyledLayout>
-      <Global
-        styles={css`
-          pre {
-            background: #f2f2f2;
-            overflow: scroll;
-            padding: 1em;
-          }
-        `}
+const Layout = props => {
+  console.log(props);
+  return (
+    <>
+      <GitHubCorner
+        url={`https://github.com/raulrpearson/journey-to-fullstack`}
       />
-      <SiteToc />
-      <StyledArticle>{props.children}</StyledArticle>
-      <PageToc headings={headings} />
-    </StyledLayout>
-  </>
-);
+      <StyledLayout>
+        <Global
+          styles={css`
+            pre {
+              background: #f2f2f2;
+              overflow: scroll;
+              padding: 1em;
+            }
+          `}
+        />
+        <SiteToc />
+        <StyledArticle>{props.children}</StyledArticle>
+        <PageToc headings={headings} />
+      </StyledLayout>
+    </>
+  );
+};
 
 export default Layout;

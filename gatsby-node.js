@@ -24,3 +24,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     });
   }
 };
+
+exports.onCreatePage = ({ page, actions: { createPage, deletePage } }) => {
+  deletePage(page);
+  createPage({
+    ...page,
+    context: {
+      ...page.context,
+      house: 'Gryffindor'
+    }
+  });
+};
