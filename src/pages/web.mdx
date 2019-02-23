@@ -22,6 +22,89 @@
 - Zcoin
 - Beaker browser and company
 
+## Using system fonts
+
+Triggered by ["The New System Font
+Stack?"](https://bitsofco.de/the-new-system-font-stack/), I decided to look into
+using that on my web projects. That article suggests using the following
+snippet:
+
+```css
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+```
+
+That's from September 2016, inspired by WordPress 4.6, so it's a bit out of
+date. In September 2017, CSS-Tricks provides a similar stack but gives this
+warning:
+
+> This method should only be used on the font-family property instead of the
+> font shorthand. Booking.com published a thorough write-up on the warnings it
+> generates due to the leading font appearing to be a vendor prefix.
+
+They also mention an alternative interesting strategy, using `@font-face`:
+
+```css
+/* Define the "system" font family */
+@font-face {
+  font-family: system;
+  font-style: normal;
+  font-weight: 300;
+  src: local('.SFNSText-Light'), local('.HelveticaNeueDeskInterface-Light'),
+    local('.LucidaGrandeUI'), local('Ubuntu Light'), local('Segoe UI Light'),
+    local('Roboto-Light'), local('DroidSans'), local('Tahoma');
+}
+
+/* Now, let's apply it on an element */
+body {
+  font-family: 'system';
+}
+```
+
+Using the
+[`system-font.css`](https://github.com/jonathantneal/system-font-css/blob/gh-pages/system-font.css)
+you can use eight variations of the system-ui font family; light (300) light
+italic, normal (400), normal italic, medium (500), medium italic, bold (700),
+and bold italic. Like this:
+
+```css
+body {
+  font-family: system-ui;
+}
+
+blockquote {
+  font: italic 300 system-ui;
+}
+
+p {
+  font: 400 system-ui;
+}
+```
+
+Note that in the previous two cases, the font faces `system` and `system-ui`
+were being defined in the accompanying CSS. On the other hand, `system-ui` was
+added as a possible value for the `font-family` property in CSS. It seems
+[decently supported](https://caniuse.com/#feat=font-family-system-ui).
+
+It seems appropriate to use [the
+following](https://furbo.org/2018/03/28/system-fonts-in-css/):
+
+```css
+font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+```
+
+But [this](https://infinnie.github.io/blog/2017/systemui.html), so W(ho)TF
+knows. I just checked Bootstrap and they use this:
+
+```css
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica
+Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe
+UI Symbol', 'Noto Color Emoji';
+```
+
 ## Loading fonts
 
 To read: [Web Font
