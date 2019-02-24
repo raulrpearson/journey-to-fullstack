@@ -94,7 +94,63 @@ Some of my takeaways:
 - Understand npm audit results
 - Understand how to create a package.json from scratch
 - yarn workspaces and monorepos
-- How to publish an npm package
+
+### Publishing on npm
+
+This [article from
+Freecodecamp](https://medium.freecodecamp.org/how-to-make-a-beautiful-tiny-npm-package-and-publish-it-2881d4307f78)
+goes over the least possible work from zero to published package. In summary:
+
+1. Put your code inside a folder. The `package.json` in that folder should
+   have a name and version at the very least.
+2. Create an account on npm and log in using the command line: `npm adduser` or
+   `npm login`.
+3. Publish with `npm publish` or `npm publish --access=public` if you've used a
+   scoped package name, since scoped packages are published privately by
+   default (and you need a paid account to publish privately).
+
+Some additional notes:
+
+- Those steps will get you from zero to published, but there's a bit more that
+  you'd typically want to do: add a README, a LICENSE, more fields to the
+  `package.json` files, badges to your README file, an .npmignore file, etc.
+
+- Understand [semantic versioning](https://semver.org/) so that you can assign
+  versions correctly. Note that you can use `npm version [major|minor|patch]` to
+  update your `package.json` from the command line. The command has more options,
+  check them out.
+
+- Understand [package scoping](https://docs.npmjs.com/misc/scope) in case you
+  want to use that feature.
+
+- [Understand](https://blog.greenkeeper.io/one-simple-trick-for-javascript-package-maintainers-to-avoid-breaking-their-user-s-software-and-to-6edf06dc5617) [`npm dist-tag`](https://docs.npmjs.com/cli/dist-tag) and how to
+  use `npm publish --tag=<tag-name>`. When you publish, npm puts that new
+  version on the `latest` tag by default. If you're maintaining different major
+  versions of your package, this could create problems for your users. If you
+  publish a patch for your 3.x version, your users will install that instead of
+  your latest 4.x. Learn how to use tags to manage this. You could have `next`
+  for a 5.x work in progress, `latest` for your stable up to date 4.x work and
+  `3.x-latest` for maintenance.
+
+### Developing an npm package
+
+The short version: use [`npm link`](https://docs.npmjs.com/cli/link.html). But
+if you need to test preinstall/postinstall hooks for your package, `npm link`
+won’t run those hooks, so [you
+do](https://medium.com/@the1mills/how-to-test-your-npm-module-without-publishing-it-every-5-minutes-1c4cb4b369be):
+
+```bash
+npm install /absolute/local/path/to/your/other/package
+```
+
+Note that `npm link` creates a symlink to `<your-package>` in the global space,
+and then when you call npm link viking from `<your-project>`, it creates a
+symlink not directly to `<your-package>`, but rather to the global symlink. This
+is an important differences if you are using different global Node.js versions,
+e.g., NVM. `npm install /absolute/path/viking` will alter `package.json`, `npm link` does not.
+
+Check out [Lerna](https://lernajs.io/), a tool that optimizes the workflow
+around managing multi-package repositories with git and npm.
 
 ## Resources and assets
 
