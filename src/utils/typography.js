@@ -11,7 +11,13 @@ const typography = new Typography({
     'Arial',
     'sans-serif'
   ],
-  bodyFontFamily: ['Georgia', 'serif']
+  bodyFontFamily: ['Georgia', 'serif'],
+  googleFonts: [
+    {
+      name: 'Inconsolata',
+      styles: ['400']
+    }
+  ]
 });
 
 export default typography;

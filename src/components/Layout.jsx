@@ -41,10 +41,24 @@ const Layout = props => (
     <StyledLayout>
       <Global
         styles={css`
+          code {
+            background: #f2f2f2;
+            font-family: 'Inconsolata', monospace;
+            font-size: 1em;
+            padding: 3px;
+          }
+
           pre {
+            font-size: 1em;
+            line-height: 1.2em;
             background: #f2f2f2;
             overflow: scroll;
             padding: 1em;
+          }
+
+          pre > code {
+            padding: 0;
+            line-height: 1.2em;
           }
         `}
       />
