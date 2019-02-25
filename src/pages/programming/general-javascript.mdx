@@ -2,6 +2,8 @@
 title: 'General Javascript'
 ---
 
+import Todo from '../../components/Todo';
+
 # General JavaScript
 
 - ECMAScript [compatibility table](https://kangax.github.io/compat-table/es6/)
@@ -45,15 +47,61 @@ title: 'General Javascript'
   technique for transforming functions so that they help with partial
   application.
 
-- A [closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
-  is the combination of a function and the lexical environment within which that
-  function was declared. This environment consists of any local variables that
-  were in-scope at the time the closure was created.
-
 - A [_falsy_](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) value is
   a value that is considered false when encountered in a Boolean context. Falsy
   values are `false`, `0`, `""`, `null`, `undefined` and `NaN`. Truthy values
   are all the rest. JavaScript coerces values to Boolean in Boolean contexts.
+
+### Closures and scope
+
+A [closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) is
+the combination of a function and the lexical environment within which that
+function was declared. This environment consists of any local variables that
+were in-scope at the time the closure was created. [This Freecodecamp
+article](https://medium.freecodecamp.org/javascript-closures-simplified-d0d23fa06ba4)
+provides a good discussion. Try to understand this code:
+
+```javascript
+function outer() {
+  var b = 10;
+  var c = 100;
+  function inner() {
+    var a = 20;
+    console.log('a=' + a + ' b=' + b);
+    a++;
+    b++;
+  }
+  return inner;
+}
+
+var X = outer(); // outer() invoked the first time
+var Y = outer(); // outer() invoked the second time
+//end of outer() function executions
+
+X(); // X() invoked the first time
+X(); // X() invoked the second time
+X(); // X() invoked the third time
+
+Y(); // Y() invoked the first time
+```
+
+The result is the following:
+
+```bash
+a=20 b=10
+a=20 b=11
+a=20 b=12
+a=20 b=10
+```
+
+Notice that the updated value of `b` persists in `inner`'s closure from call to
+call, as you can see from the consecutive calls to `X`. Note also that `c` will
+not be part of `inner`'s closure. Finally, it's not that `a` is
+overwritten/redeclared by `var a = 20`: it leaves memory every time `inner`
+finishes and declared anew every new execution. It doesn't form part of the
+closure.
+
+<Todo>Read about scope and scope chain</Todo>
 
 ## JavaScript frameworks
 
