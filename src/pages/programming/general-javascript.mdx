@@ -114,6 +114,95 @@ closure.
 
 <Todo>Read about scope and scope chain</Todo>
 
+## Type coercion
+
+First understand that there's two "types" of [data
+types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types):
+6 primitive types (Boolean, Null, Undefined, Number, String and Symbol) and the
+Object type, from which [many data
+structures/types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
+are built. There's these [possible
+transformations](https://codeburst.io/one-rule-and-three-exceptions-to-understand-javascript-coercion-35289365c449):
+
+**ToBoolean**
+
+- `undefined`, `null`, `0`, `-0`, `NaN` and `''` are all considered
+  _falsy_ and are coerced into the `false` primitive value (implicitly in
+  boolean contexts or explicitly with the appropriate syntax)
+- Everything is coerced into the `true` primitive value.
+
+**ToNumber**
+
+- `null`, `false`, and `''`, are converted to `0`
+- `true` is converted to `1`
+- `undefined` and strings that aren’t numbers in disguise ( like `"2"`) are
+  converted to `NaN`. Numbers in strings clothes are converted to the
+  corresponding numeric value.
+
+**ToString**
+
+- The literal value of the input becomes the string. For example `undefined`
+  becomes `"undefined"`, `true` becomes `"true"`, and `2` becomes `"2"`.
+
+**Symbols**
+
+Symbols aren’t really meant to be converted into other types. ToBoolean is the
+only one that will still convert them to true as they’re not on the “falsy”
+list. ToNumber and ToString will throw TypeErrors when given a symbol value to
+convert.
+
+**Objects**
+
+- For ToBoolean it’s simple: again, objects are not in the falsy list, so
+  they’re always converted to `true`
+
+- Most objects get `valueOf` and `toString` methods from their prototype. The cards
+  will call one of them to try and get a primitive representation of the object.
+  As you might have guessed, ToNumber prefers to call `valueOf` first and
+  ToString will first try `toString`. If this call returns a primitive value,
+  that value is converted to a string or number following the rules above.
+  Otherwise, the card will try the other method, its least favorite, and see if
+  that returns a primitive value. If it didn’t, no conversion is possible, so a
+  `TypeError` will be thrown.
+
+**Operators**
+
+- R1: All operators convert their operands of different types to numbers.
+
+- E1: Logical operators convert them to booleans instead.
+
+- E2: `==` and `+` apply ToPrimitive on their object operands which means trying
+  `toString` first for `Date` objects, and just returning the wrapped symbol
+  value for `Symbol` objects. E2.1: `null` and `undefined` are only considered
+  equal to each other by `==` and not converted to any other types.
+
+- E3: If one of the operands is a string, the `+` operator will convert the other
+  into a string as well.
+
+As an exercise, try to understand these rules and then try to predict the
+following (taken from [this Freecodecamp
+article](https://medium.freecodecamp.org/js-type-coercion-explained-27ba3d9a2839)):
+
+```javascript
+true + false
+12 / "6"
+"number" + 15 + 3
+15 + 3 + "number"
+[1] > null
+"foo" + + "bar"
+'true' == true
+false == 'false'
+null == ''
+!!"false" == !!"true"
+[‘x’] == ‘x’
+[] + null + 1
+[1,2,3] == [1,2,3]
+{}+[]+{}+[1]
+!+[]+[]+![]
+new Date(0) - 0
+new Date(0) + 0
+```
+
 ## JavaScript frameworks
 
 - [Hyperapp](https://github.com/jorgebucaran/hyperapp/), 1kB JavaScript
