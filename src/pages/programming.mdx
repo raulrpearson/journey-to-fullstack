@@ -90,3 +90,54 @@ Resources:
 - [ReasonML](https://reasonml.github.io/)
 - [Elm](https://elm-lang.org/)
 - [Jest](https://jestjs.io/)
+
+## Redis
+
+From the [intro page](https://redis.io/topics/introduction):
+
+Redis is an open source in-memory data structure store, used as a database,
+cache and message broker. It supports data structures such as strings, hashes,
+lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial
+indexes with radius queries and streams.
+
+It has built-in replication, Lua scripting, LRU eviction, transactions and
+different levels of on-disk persistence, and provides high availability via
+Redis Sentinel and automatic partitioning with Redis Cluster.
+
+You can run atomic operations on these types, like appending to a string;
+incrementing the value in a hash; pushing an element to a list; computing set
+intersection, union and difference; or getting the member with highest ranking
+in a sorted set.
+
+In order to achieve its outstanding performance, Redis works with an in-memory
+dataset. Depending on your use case, you can persist it either by dumping the
+dataset to disk every once in a while, or by appending each command to a log.
+Persistence can be optionally disabled, if you just need a feature-rich,
+networked, in-memory cache.
+
+Redis also supports trivial-to-setup master-slave asynchronous replication, with
+very fast non-blocking first synchronization, auto-reconnection with partial
+resynchronization on net split.
+
+You can get a feel for Redis with this [Try Redis](http://try.redis.io/) site.
+
+The most [popular applications of
+Redis](https://www.objectrocket.com/blog/how-to/top-5-redis-use-cases/) are:
+
+- Session cache in web applications, saving state of the current user session
+  like contents of cart, settings, etc.
+
+- Full Page Cache (FPC) for improving the speed of server generated websites.
+  For example, [wp-redis](https://wordpress.org/plugins/wp-redis/) is a plugin to
+  use Redis to speed up WordPress sites.
+
+- Queues can be implemented easily with the API provided by Redis. As an
+  example,
+  [Celery](http://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html)
+  provides a Redis backend for their task queue solution.
+
+- Leaderboards/counting: again, Redis offers great utilities and API to make
+  these applications easy to build. In this case, sorted sets, helps with any kind
+  of ranked list of unique elements.
+
+- Pub/Sub: same same, great utilities and API.
