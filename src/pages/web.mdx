@@ -259,3 +259,170 @@ Learn about
 
 Learn about [web
 components](https://codeburst.io/6-reasons-you-should-use-native-web-components-b45e18e069c2).
+
+## Solid
+
+[Solid](https://solid.mit.edu/) (Social Linked Data) is a web decentralization
+project led by Tim Berners-Lee, the inventor of the World Wide Web. The project:
+
+> aims to radically change the way Web applications work today, resulting in
+> true data ownership as well as improved privacy
+
+by developing a platform for linked-data applications that are completely
+decentralized and fully under users' control rather than controlled by other
+entities.
+
+Solid's central focus is to enable the discovery and sharing of information in a
+way that preserves privacy. A user stores personal data in "pods" (personal
+online data stores) hosted wherever the user desires. Applications that are
+authenticated by Solid are allowed to request data if the user has given the
+application permission.
+
+A user may distribute personal information among several pods; for example,
+different pods might contain personal profile data, contact information,
+financial information, health, travel plans, or other information. The user
+could then join an authenticated social-networking application by giving it
+permission to access appropriate information in a specific pod.
+
+The user retains complete ownership and control of data in the user's pods: what
+data each pod contains, where each pod is stored, and which applications have
+permission to use the data.
+
+### Specification overview
+
+[Solid](https://solid.inrupt.com/docs/intro-to-solid-spec) is a proposed set of
+conventions and tools for building decentralized social applications based on
+[Linked Data](https://www.w3.org/DesignIssues/LinkedData.html) principles. Solid
+is modular and extensible. It relies as much as possible on existing W3C
+standards and protocols.
+
+- **Identity**: Solid uses
+  [WebID](http://www.w3.org/2005/Incubator/webid/spec/identity/) URIs as
+  universal usernames or actor identifiers. WebIDs provide globally unique
+  decentralized identifiers, enable cross-service federated signin, prevent
+  service provider lock-in, and give users control over their own identity.
+
+- **Profiles**: the WebID URI's primary function is to point to the location of a
+  public WebID Profile Document. Solid uses these for management of user identity
+  and security credentials (such as public keys), and user preferences
+  discovery. Profiles are used by many actor types like users, groups,
+  organizations, devices and software applications.
+
+  A WebID URI, when dereferenced, yields a WebID Profile Document in a Linked
+  Data format (Turtle by default, but often available as JSON-LD or HTML+RDFa).
+  Parsing this document provides a client application with useful information,
+  such as the user's name and profile image, links to user preferences and
+  related documents, and lists of public key certificates or other relevant
+  identity credentials.
+
+  See component spec: [Solid WebID Profiles
+  Specification](https://github.com/solid/solid-spec/blob/master/solid-webid-profiles.md).
+
+- **Authentication**: the process of determining a user’s identity. Applications
+  usually manage authentication with usernames and passwords as well as a recovery
+  mechanism using typically email.
+
+  Solid currently uses
+  [WebID-TLS](https://www.w3.org/2005/Incubator/webid/spec/tls/) as its primary
+  authentication mechanism. Alternative complementary mechanisms are also being
+  actively investigated. In addition, Solid recommends that server
+  implementations also offer secondary authentication available for users for
+  Account Recovery (via email or some other out-of-band mechanism).
+
+  See component spec: [Solid WebID-TLS
+  Specification](https://github.com/solid/solid-spec/blob/master/authn-webid-tls.md).
+
+  The Solid team is currently implementing support for WebID-OIDC as another
+  primary authentication mechanism. It is based on the OAuth2/OpenID Connect
+  protocols, adapted for WebID based decentralized use cases.
+
+  See component spec: [WebID-OIDC
+  Specification](https://github.com/solid/webid-oidc-spec).
+
+  There are several other authentication mechanisms that are currently being
+  investigated, such as combinations of traditional username-and-password
+  authentication and WebID-TLS Delegation.
+
+  Regardless of the primary authentication mechanism, bearer tokens and other
+  proofs of identity tend to get lost by users. Passwords can be forgotten,
+  browser certificates can be lost to hardware failure, and so on. Solid
+  recommends that secondary Account Recovery mechanisms are provided by server
+  implementers, to aid in these scenarios.
+
+- **Authorization and access control**: the process of deciding whether a user
+  has access to a particular resource. Solid currently uses the Web Access
+  Control (WAC) mechanism for cross-domain authorization for all its resources.
+
+  See component spec: [Solid WAC
+  Specification](https://github.com/solid/web-access-control-spec).
+
+- **Content representation**: Solid deals with reading and writing two kinds of
+  resources: Linked Data resources (RDF in the form of JSON-LD, Turtle, HTML+RDFa,
+  etc.) and everything else (binary data and non-linked-data structured text).
+  you can build Solid applications with non-linked data resources, using actual
+  RDF-based Linked Data provides you with considerable benefits in terms of
+  interoperability with the rest of the Solid app ecosystem.
+
+  See component spec: [Solid Content
+  Representation](https://github.com/solid/solid-spec/blob/master/content-representation.md).
+
+- **Reading and writing resources**: Solid extends the [Linked Data
+  Platform](https://www.w3.org/TR/ldp/) spec to provide a simple REST API for CRUD
+  operations on resources and containers. Solid also provides a WebSockets based
+  API for a PubSub (Publish/Subscribe) mechanism, through which clients can be
+  notified in real time of changes affecting a give resource.
+
+  See component spec: [HTTPS REST
+  API](https://github.com/solid/solid-spec/blob/master/api-rest.md).
+
+  See component spec: [WebSockets
+  API](https://github.com/solid/solid-spec/blob/master/api-websockets.md).
+
+- **Social web app protocols**: Solid provides a number of specs and
+  recommendations to help developers achieve interoperability between various
+  social web applications that are part of the ecosystem. Currently,
+  notifications. API recommendations for managing subscriptions and friends lists
+  are still being discussed.
+
+  See component spec: [Linked Data Notifications](https://www.w3.org/TR/ldn/)
+
+- **Recommendations for implementations**: for servers and clients.
+
+  See component spec: [Recommendations for Server
+  Implementations](https://github.com/solid/solid-spec/blob/master/recommendations-server.md).
+
+  See component spec: [Recommendations for Client
+  Implementations](https://github.com/solid/solid-spec/blob/master/recommendations-client.md).
+
+### Repositories of interest
+
+- [solid-spec](https://github.com/solid/solid-spec): the Solid spec and
+  architecture
+
+- [node-solid-server](https://github.com/solid/node-solid-server): Solid server
+  in Node.js. It lets you run a Solid server on top of the file-system. You can
+  use it as a command-line tool (easy) or as a library (advanced).
+
+- [solid-auth-client](https://github.com/solid/solid-auth-client): browser
+  library that allows your apps to securely log in to Solid data pods and read
+  and write data from them.
+
+- [rdflib.js](https://github.com/linkeddata/rdflib.js/): JavaScript RDF library
+  for browsers and Node.js.
+
+- React resources by Inrupt:
+  [solid-react-sdk](https://github.com/Inrupt-inc/solid-react-sdk),
+  [solid-style-guide](https://github.com/Inrupt-inc/solid-style-guide),
+  [generator-solid-react](https://github.com/Inrupt-inc/generator-solid-react)
+  and
+  [solid-react-components](https://github.com/Inrupt-inc/solid-react-components).
+
+- The [Solid organization](https://github.com/solid) GitHub page.
+
+- The [Inrupt organization](https://github.com/Inrupt-inc) GitHub page.
+
+### Interesting apps
+
+- [Solid Pay](https://docs.solidpay.org/) is about making payments between two
+  people on the Web. It builds heavily on the Solid framework and the
+  [webcredits](https://webcredits.github.io/spec/) specification.
