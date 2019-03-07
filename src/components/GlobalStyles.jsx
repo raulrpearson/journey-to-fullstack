@@ -4,6 +4,11 @@ import { Global, css } from '@emotion/core';
 const GlobalStyles = () => (
   <Global
     styles={css`
+      html,
+      body {
+        scroll-behavior: smooth;
+      }
+
       code {
         background: #f2f2f2;
         font-family: 'Inconsolata', monospace;

@@ -1,10 +1,12 @@
 import React from 'react';
+import { MDXProvider } from '@mdx-js/tag';
 import styled from '@emotion/styled';
 import { Global, css } from '@emotion/core';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 import GlobalStyles from './GlobalStyles';
 import GitHubCorner from './GitHubCorner';
+import headings from './Headings';
 import SiteToc from './SiteToc';
 import PageToc from './PageToc';
 
@@ -66,7 +68,7 @@ const Menu = styled.div`
 
 // This will be the result of a query eventually, once I've figured out how to
 // do a query with $id and pass that data into the component through props
-const headings = [
+const pageTocHeadings = [
   {
     url: '#glossary-of-concepts',
     title: 'Glossary of concepts'
@@ -76,7 +78,7 @@ const headings = [
     title: 'JavaScript frameworks'
   },
   {
-    url: '#a-review-of-es6',
+    url: '#a-review-of-es-6',
     title: 'A review of ES6'
   }
 ];
@@ -94,7 +96,7 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <>
+      <MDXProvider components={headings}>
         <GlobalStyles />
         {!this.state.closed && (
           <Global
@@ -120,7 +122,7 @@ class Layout extends React.Component {
           >
             {this.props.children}
           </StyledArticle>
-          <PageToc headings={headings} />
+          <PageToc headings={pageTocHeadings} />
         </StyledLayout>
         <Menu onClick={this.handleClick}>
           {this.state.closed ? (
@@ -129,7 +131,7 @@ class Layout extends React.Component {
             <FaTimes id="bars" size="1.4em" />
           )}
         </Menu>
-      </>
+      </MDXProvider>
     );
   }
 }
