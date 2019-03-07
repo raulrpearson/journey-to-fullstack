@@ -12,5 +12,16 @@
     "mdx": {
       "parser": "markdown"
     }
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#8621f4",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#cfb6ea",
+    "titleBar.activeBackground": "#6d0bd7",
+    "titleBar.inactiveBackground": "#37066c",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveForeground": "#c9b0e3",
+    "statusBar.background": "#6d0bd7",
+    "statusBar.foreground": "#e7e7e7"
   }
 }
