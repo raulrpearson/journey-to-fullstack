@@ -11,6 +11,13 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'pages',
+        path: `${__dirname}/pages/`
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'pages',
         path: `${__dirname}/src/pages/`
       }
     },
@@ -19,7 +26,7 @@ module.exports = {
       resolve: 'gatsby-mdx',
       options: {
         extensions: ['.mdx', '.md'],
-        defaultLayout: require.resolve('./src/components/Layout.jsx'),
+        // defaultLayout: require.resolve('./src/components/Layout.jsx'),
         // mdPlugins: [require('remark-toc')],
         gatsbyRemarkPlugins: [
           // { resolve: `gatsby-remark-katex` },
