@@ -41,8 +41,8 @@ const StyledArticle = styled.article`
 
 const Menu = styled.div`
   position: fixed;
-  bottom: 2em;
-  right: 2em;
+  bottom: 1em;
+  right: 1em;
   z-index: 100;
   width: 3em;
   height: 3em;
