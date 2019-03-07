@@ -10,6 +10,7 @@ const StyledAside = styled.aside`
 `;
 
 const StyledList = styled.ul`
+  font-family: 'Avenir Next';
   list-style-type: none;
   padding-left: 0;
   margin-left: 0;
