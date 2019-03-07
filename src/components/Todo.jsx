@@ -20,10 +20,8 @@ const TodoBox = styled.div`
 
 const Todo = ({ children }) => (
   <TodoBox>
-    <p>
-      <span class="todo">TODO</span>
-      {children}
-    </p>
+    <span className="todo">TODO</span>
+    {children}
   </TodoBox>
 );
 
