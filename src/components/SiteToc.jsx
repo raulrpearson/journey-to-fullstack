@@ -1,34 +1,43 @@
 import React from 'react';
 import { Link, graphql, StaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 
 const StyledAside = styled.aside`
   position: sticky;
-  top: 2em;
+  top: 0;
   align-self: start;
-  height: calc(100vh - 4em);
+  height: 100vh;
   overflow: scroll;
+  z-index: 90;
+
+  @media (max-width: 850px) {
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+    & > li {
+      text-transform: uppercase;
+      font-family: 'Avenir Next';
+      font-weight: bold;
+    }
+    a {
+      text-decoration: none;
+      color: gray;
+    }
+    a:hover {
+      filter: brightness(50%);
+    }
+  }
 `;
 
-const StyledList = styled.ul`
-  list-style-type: none;
-  padding-left: 0;
-  margin-left: 0;
-  & > li {
-    text-transform: uppercase;
-    font-family: 'Avenir Next';
-    font-weight: bold;
-  }
-  a {
-    text-decoration: none;
-    color: gray;
-  }
-  a:hover {
-    filter: brightness(50%);
-  }
-`;
-
-const SiteToc = () => (
+const SiteToc = ({ hide }) => (
   <StaticQuery
     query={graphql`
       query {
@@ -46,8 +55,18 @@ const SiteToc = () => (
       }
     `}
     render={data => (
-      <StyledAside>
-        <StyledList>
+      <StyledAside
+        id="site-toc"
+        css={
+          hide &&
+          css`
+            @media (max-width: 850px) {
+              display: none;
+            }
+          `
+        }
+      >
+        <ul>
           {data.allMdx.edges.map(
             ({
               node: {
@@ -60,7 +79,7 @@ const SiteToc = () => (
               </li>
             )
           )}
-        </StyledList>
+        </ul>
       </StyledAside>
     )}
   />

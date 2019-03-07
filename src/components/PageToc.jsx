@@ -3,9 +3,9 @@ import styled from '@emotion/styled';
 
 const StyledAside = styled.aside`
   position: sticky;
-  top: 2em;
+  top: 0;
   align-self: start;
-  height: calc(100vh - 4em);
+  height: 100vh;
   overflow: scroll;
 `;
 
@@ -23,7 +23,7 @@ const StyledList = styled.ul`
 `;
 
 const PageToc = ({ headings }) => (
-  <StyledAside>
+  <StyledAside id="page-toc">
     <h4>IN THIS ARTICLE</h4>
     <StyledList>
       {headings.map(h => (

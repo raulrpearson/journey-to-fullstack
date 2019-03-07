@@ -46,6 +46,7 @@ const GitHubCorner = ({ url }) => (
           top: 0;
           border: 0;
           right: 0;
+          z-index: 100;
         `}
         aria-hidden="true"
       >
