@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaLink } from 'react-icons/fa';
+import { FaLink, FaQuoteRight } from 'react-icons/fa';
 import kebabCase from 'lodash.kebabcase';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
@@ -25,6 +25,13 @@ const StyledAnchor = styled.a`
   & > svg {
     visibility: hidden;
   }
+`;
+
+const StyledBlockquote = styled.blockquote`
+  background-color: #f2f2f2;
+  padding: 1em;
+  border-radius: 5px;
+  /* border-left: 0.5em solid #808080; */
 `;
 
 const H1 = props => {
@@ -71,13 +78,36 @@ const H4 = props => {
   );
 };
 
+const BQ = props => (
+  <blockquote
+    css={css`
+      background-color: #f2f2f2;
+      padding: 1.3em;
+      border-radius: 5px;
+      position: relative;
+    `}
+  >
+    <FaQuoteRight
+      css={css`
+        color: #808080;
+        position: absolute;
+        top: -0.5em;
+        left: -0.5em;
+      `}
+      size="1.8em"
+    />
+    {props.children}
+  </blockquote>
+);
+
 // const MyParagraph = props => <p style={{ fontSize: '18px', lineHeight: 1.6 }} />
 
 const headings = {
   h1: H1,
   h2: H2,
   h3: H3,
-  h4: H4
+  h4: H4,
+  blockquote: BQ
 };
 
 export default headings;
