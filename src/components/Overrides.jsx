@@ -27,13 +27,6 @@ const StyledAnchor = styled.a`
   }
 `;
 
-const StyledBlockquote = styled.blockquote`
-  background-color: #f2f2f2;
-  padding: 1em;
-  border-radius: 5px;
-  /* border-left: 0.5em solid #808080; */
-`;
-
 const H1 = props => {
   return (
     <h1 css={baseHeadingStyle} id={kebabCase(props.children)}>
@@ -102,7 +95,7 @@ const BQ = props => (
 
 // const MyParagraph = props => <p style={{ fontSize: '18px', lineHeight: 1.6 }} />
 
-const headings = {
+const overrides = {
   h1: H1,
   h2: H2,
   h3: H3,
@@ -110,4 +103,4 @@ const headings = {
   blockquote: BQ
 };
 
-export default headings;
+export default overrides;

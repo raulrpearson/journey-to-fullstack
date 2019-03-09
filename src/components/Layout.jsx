@@ -1,13 +1,15 @@
 import React from 'react';
 import { MDXProvider } from '@mdx-js/tag';
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import styled from '@emotion/styled';
 import { Global, css } from '@emotion/core';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { graphql } from 'gatsby';
+import kebabCase from 'lodash.kebabcase';
 
 import GlobalStyles from './GlobalStyles';
 import GitHubCorner from './GitHubCorner';
-import headings from './Headings';
+import overrides from './Overrides';
 import SiteToc from './SiteToc';
 import PageToc from './PageToc';
 
@@ -67,24 +69,7 @@ const Menu = styled.div`
   }
 `;
 
-// This will be the result of a query eventually, once I've figured out how to
-// do a query with $id and pass that data into the component through props
-const pageTocHeadings = [
-  {
-    url: '#glossary-of-concepts',
-    title: 'Glossary of concepts'
-  },
-  {
-    url: '#javascript-frameworks',
-    title: 'JavaScript frameworks'
-  },
-  {
-    url: '#a-review-of-es-6',
-    title: 'A review of ES6'
-  }
-];
-
-class Layout extends React.Component {
+class PageTemplate extends React.Component {
   constructor(props) {
     super(props);
     this.state = { closed: true };
@@ -96,9 +81,11 @@ class Layout extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    const pageTocEntries = this.props.data.mdx.headings.map(entry => {
+      return { url: `#${kebabCase(entry.value)}`, title: entry.value };
+    });
     return (
-      <MDXProvider components={headings}>
+      <MDXProvider components={overrides}>
         <GlobalStyles />
         {!this.state.closed && (
           <Global
@@ -122,9 +109,9 @@ class Layout extends React.Component {
               `
             }
           >
-            {this.props.children}
+            <MDXRenderer>{this.props.data.mdx.code.body}</MDXRenderer>
           </StyledArticle>
-          <PageToc headings={pageTocHeadings} />
+          <PageToc headings={pageTocEntries} />
         </StyledLayout>
         <Menu onClick={this.handleClick}>
           {this.state.closed ? (
@@ -138,4 +125,23 @@ class Layout extends React.Component {
   }
 }
 
-export default Layout;
+export const pageQuery = graphql`
+  query SingleMdxQuery($id: String) {
+    mdx(id: { eq: $id }) {
+      id
+      fields {
+        title
+        slug
+      }
+      code {
+        body
+      }
+      headings {
+        value
+        depth
+      }
+    }
+  }
+`;
+
+export default PageTemplate;
