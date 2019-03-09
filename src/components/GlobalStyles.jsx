@@ -31,6 +31,18 @@ const GlobalStyles = () => (
         line-height: 1.2em;
         min-width: 0px;
       }
+
+      a {
+        color: #808080;
+      }
+
+      a:hover {
+        color: #404040;
+      }
+
+      ::selection {
+        background-color: #d2d2d2;
+      }
     `}
   />
 );
