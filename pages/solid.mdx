@@ -32,6 +32,61 @@ The user retains complete ownership and control of data in the user's pods: what
 data each pod contains, where each pod is stored, and which applications have
 permission to use the data.
 
+## Philosophy
+
+In ["Paradigm shifts for the decentralized
+Web"](https://ruben.verborgh.org/blog/2017/12/20/paradigm-shifts-for-the-decentralized-web/),
+Ruben Verborgh lays out several interesting ideas:
+
+> In this blog post, I will discuss three paradigm shifts we need to prepare for
+> if we want to build Web applications with a decentralized mindset:
+
+> 1. End users become data owners. This is the most well-known decentralization
+>    aspect: we store our data in places of our choice, which improves privacy and
+>    control.
+
+> 2. Apps become views. As apps become decoupled from data, they start acting
+>    as interchangeable views rather than the single gateway to that data.
+
+> 3. Interfaces become queries. Data will be distributed across highly diverse
+>    interfaces, so sustainable apps need declarative contracts instead of custom
+>    data requests.
+
+> [...]
+
+> The main challenge with full decentralization of data is scalability. In the
+> Mastodon scenario, there are still relatively few servers for many users. In the
+> Solid scenario, there might even be more data pods than users. In the end,
+> decentralization will go hand in hand with dynamic data replication, which will
+> need to be balanced carefully with fine-grained access control possibilities in
+> order to guarantee data privacy.
+
+> [...]
+
+> In contrast, decentralized Web applications decouple data and applications:
+> you enter data only once—in your own data pod. Instead of maintaining
+> credentials with each app, you log in through your data pod and give apps
+> permission to read or write specific parts of your data. The Web’s ecosystem
+> thereby evolves from bundled data+service packages into applications as
+> interchangeable views, wherein each Web app provides consistent visualizations,
+> interactions, and processing over your personal data pod. Furthermore, those
+> apps let you interact with any other data pods you have access to, such as those
+> of your friends. Applications ask rather than own, and they are able to reuse
+> data create by other apps, avoiding vendor lock-in.
+
+> [...]
+
+> The combination of decentralization and query execution also confronts us with
+> a temporally different way of interacting with data. In traditional Web
+> applications, the procedure is typically “send query—wait for execution to
+> complete—act on all results”. In a decentralized setting, we know that data
+> collection will take time, so applications should be prepared to do more useful
+> things instead of just waiting. The procedure becomes “send query—act on each
+> incoming result”, processing every piece of incoming data a streaming way. In
+> general, completeness should never be assumed, given that the Web is an open
+> world. This is an additional indication of how radically the relation between
+> data and applications will change.
+
 ## Specification overview
 
 [Solid](https://solid.inrupt.com/docs/intro-to-solid-spec) is a proposed set of
@@ -283,3 +338,12 @@ GraphQL with Linked Data:
   Group](https://www.w3.org/community/rdfjs/) discusses implementations of
   libraries for working with RDF and Linked Data in ECMAScript platforms like Web
   browsers and Node.js
+
+- ["Designing a Linked Data developer
+  experience"](https://ruben.verborgh.org/blog/2018/12/28/designing-a-linked-data-developer-experience/)
+  provides a great overview of
+  [LDflex](https://github.com/RubenVerborgh/LDflex), a JavaScript DSL for
+  querying Linked Data on the Web. It presents an
+  [application](https://solid.github.io/ldflex-playground/) including [LDflex
+  for Solid](https://github.com/solid/query-ldflex/) and [Comunica for
+  LDflex](https://github.com/RubenVerborgh/LDflex-Comunica). Cool stuff.
