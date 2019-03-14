@@ -152,7 +152,10 @@ standards and protocols.
   and write data from them.
 
 - [rdflib.js](https://github.com/linkeddata/rdflib.js/): JavaScript RDF library
-  for browsers and Node.js.
+  for browsers and Node.js. Also, repos from [RDFJS
+  org](https://github.com/rdfjs).
+
+- [graphql-to-sparql.js](https://github.com/rubensworks/graphql-to-sparql.js)
 
 - React resources by Inrupt:
   [solid-react-sdk](https://github.com/Inrupt-inc/solid-react-sdk),
@@ -164,6 +167,9 @@ standards and protocols.
 - The [Solid organization](https://github.com/solid) GitHub page.
 
 - The [Inrupt organization](https://github.com/Inrupt-inc) GitHub page.
+
+- [solid-file-client](https://github.com/jeff-zucker/solid-file-client), a
+  library for creating and managing files and folders in Solid data stores.
 
 ## Interesting apps
 
@@ -192,6 +198,13 @@ standards and protocols.
 - [solid-focus](https://github.com/noeldemartin/solid-focus) a task manager
   implemented in Vue, using the Solid protocol to store data into a Solid POD.
 
+- [FormRouter](http://www.formrouter.com/solidtest/solid.htm). "Using a
+  FormRouter Account, it is now possible to setup an online form that can route
+  directly into a SOLID POD. This allows any person with a SOLID POD to get a copy
+  of the form data they filled out. The submission data may include a copy of the
+  form as a PDF attachment. We have also created a File Extraction Utility to open
+  file attachments from your POD inbox."
+
 ## Related links
 
 - [solid-wiki](https://www.bourgeoa.ga/solid-wiki/index.php?title=Main_Page)
@@ -211,31 +224,62 @@ standards and protocols.
 - [SAFE Network](https://safenetwork.tech/). Freedom of expression, control of
   personal data, private and secure communications, and a whole new economy.
 
-<!-- {/* <Todo>
-  <ul>
-    <li>
-      <a href="https://www.digitaltrends.com/web/ways-to-decentralize-the-web/">
-        How the father of the World Wide Web plans to reclaim it from Facebook
-        and Google
-      </a>
-    </li>
-    <li>
-      <a href="https://medium.freecodecamp.org/an-introduction-to-solid-tim-berners-lees-new-re-decentralized-web-25d6b78c523b">
-        An introduction to SOLID, Tim Berners-Lee’s new, re-decentralized Web
-      </a>
-    </li>
-    <li>
-      <a href="https://medium.com/@timberners_lee/one-small-step-for-the-web-87f92217d085">
-        One Small Step for the Web…
-      </a>
-    </li>
-    <li>
-      <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL</a>
-    </li>
-    <li>
-      <a href="https://solid.inrupt.com/docs/getting-started">
-        Inrupt's Solid docs
-      </a>
-    </li>
-  </ul>
-</Todo> */} -->
+- [solid/community](https://github.com/solid/community): documentation,
+  guidelines, discussion, and best practices for the Solid community.
+
+## Querying
+
+- [SPARQL](https://en.wikipedia.org/wiki/SPARQL), a recursive acronym for SPARQL
+  Protocol and RDF Query Language, is an RDF query language — that is, a semantic
+  query language for databases — able to retrieve and manipulate data stored in
+  Resource Description Framework (RDF) format.
+
+[Ruben Verborgh](https://ruben.verborgh.org/) and [Ruben
+Taelman](https://www.rubensworks.net/) and others are doing a lot to connect
+GraphQL with Linked Data:
+
+- [Querying on a decentralized Web - Ruben Verborgh - GraphQL Day
+  2018 (video)](https://www.youtube.com/watch?v=LUF7plExdv8)
+
+- [Bridges between GraphQL and
+  RDF (slides)](https://www.rubensworks.net/raw/slides/2019/w3c-data-ws-graphql-rdf/)
+
+- [GraphQL-LD: Linked Data Querying with
+  GraphQL](https://comunica.github.io/Article-ISWC2018-Demo-GraphQlLD/#query):
+  In this article, we introduce GraphQL-LD, an approach that consists of a
+  method for transforming GraphQL queries coupled with a JSON-LD context to
+  SPARQL, and a method for converting SPARQL results to the GraphQL
+  query-compatible response. We demonstrate this approach by implementing it
+  into the Comunica framework. This approach brings us one step closer towards
+  widespread Linked Data consumption for application development.
+
+  Check out the code for the modules in the GraphQL-LD system:
+  [graphql-to-sparql.js](https://github.com/rubensworks/graphql-to-sparql.js),
+  [sparqljson-to-tree.js](https://github.com/rubensworks/sparqljson-to-tree.js).
+  Also, the [live demo](http://query.linkeddatafragments.org/)
+
+- [HyperGraphQL](https://www.hypergraphql.org/): a GraphQL interface for
+  querying and serving linked data on the Web. It is designed to support
+  federated querying and exposing data from multiple linked data services using
+  GraphQL query language and schemas. The core of the response is a
+  [JSON-LD](https://json-ld.org/) object, which extends the standard JSON with
+  the JSON-LD context enabling semantic disambiguation of the contained data.
+
+- [Comunica: a Modular SPARQL Query Engine for the
+  Web](https://comunica.github.io/Article-ISWC2018-Resource/). Also, what it
+  seems to be its [home page](http://comunica.linkeddatafragments.org/) and [main
+  GitHub repo](https://github.com/comunica/comunica).
+
+- [Linked Data Fragments](http://linkeddatafragments.org/concept/) is a
+  conceptual framework that provides a uniform view on all possible interfaces to
+  RDF, by observing that each interface partitions a dataset into its own specific
+  kind of fragments.
+
+  A Linked Data Fragment (LDF) is characterized by a specific selector (subject
+  URI, SPARQL query, …), metadata (variable names, counts, …), and controls (links
+  or URIs to other fragments).
+
+- The [RDF JavaScript Libraries Community
+  Group](https://www.w3.org/community/rdfjs/) discusses implementations of
+  libraries for working with RDF and Linked Data in ECMAScript platforms like Web
+  browsers and Node.js
