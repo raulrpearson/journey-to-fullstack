@@ -78,6 +78,15 @@ const BQ = props => (
       padding: 1.3em;
       border-radius: 5px;
       position: relative;
+      --margin: 0;
+      @media (min-width: 630px) {
+        --margin: calc(32 * ((100vw - 630px) / (800 - 630)));
+      }
+      @media (min-width: 800px) {
+        --margin: 32px;
+      }
+      margin-right: var(--margin);
+      margin-left: var(--margin);
     `}
   >
     <FaQuoteRight
