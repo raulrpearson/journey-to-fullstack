@@ -9,18 +9,22 @@ const baseHeadingStyle = css`
   &:hover > a > svg {
     visibility: visible;
   }
-
   a:hover > svg {
     visibility: visible;
+  }
+  @media (hover: none) {
+    a > svg {
+      visibility: visible;
+    }
   }
 `;
 
 const StyledAnchor = styled.a`
-  font-size: 0.5em;
+  font-size: 0.8rem;
   padding: 0.5em 1em 0.5em 0.5em;
   color: currentColor;
   position: absolute;
-  left: -1.8em;
+  left: -1.3rem;
 
   & > svg {
     visibility: hidden;
