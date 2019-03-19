@@ -17,7 +17,7 @@ const StyledLayout = styled.div`
   display: grid;
   width: 100vw;
   box-sizing: border-box;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: max-content auto max-content;
   gap: 1em;
   margin: 0;
 
@@ -26,7 +26,7 @@ const StyledLayout = styled.div`
   }
 
   @media (max-width: 1100px) {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: max-content 1fr;
 
     & > aside#page-toc {
       display: none;
@@ -40,6 +40,7 @@ const StyledLayout = styled.div`
 
 const StyledArticle = styled.article`
   min-width: 100px;
+  max-width: 100%;
   justify-self: center;
 
   & > div {
