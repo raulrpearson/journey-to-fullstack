@@ -6,6 +6,8 @@ import { css } from '@emotion/core';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import duotoneLight from 'prism-react-renderer/themes/duotoneLight';
 
+import CodeTag from './CodeTag';
+
 const baseHeadingStyle = css`
   position: relative;
   &:hover > a > svg {
@@ -118,21 +120,28 @@ const Code = ({ children, className }) => {
       theme={{ ...duotoneLight, plain: { backgroundColor: '#f2f2f2' } }}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre
-          className={className}
-          style={{ ...style, padding: '20px', fontFamily: 'Inconsolata' }}
-        >
-          {tokens.map((line, i) => {
-            if (i < tokens.length - 1)
-              return (
-                <div key={i} {...getLineProps({ line, key: i })}>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
-                  ))}
-                </div>
-              );
-          })}
-        </pre>
+        <>
+          <CodeTag language={language} />
+          <pre
+            className={className}
+            style={{
+              ...style,
+              padding: '1.5em 1em 1em',
+              fontFamily: 'Inconsolata'
+            }}
+          >
+            {tokens.map((line, i) => {
+              if (i < tokens.length - 1)
+                return (
+                  <div key={i} {...getLineProps({ line, key: i })}>
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token, key })} />
+                    ))}
+                  </div>
+                );
+            })}
+          </pre>
+        </>
       )}
     </Highlight>
   );
@@ -144,7 +153,14 @@ const overrides = {
   h3: H3,
   h4: H4,
   blockquote: BQ,
-  pre: props => <div {...props} />,
+  pre: props => (
+    <div
+      {...props}
+      css={css`
+        position: relative;
+      `}
+    />
+  ),
   code: Code
 };
 
