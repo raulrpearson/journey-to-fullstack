@@ -3,6 +3,8 @@ import { FaLink, FaQuoteRight } from 'react-icons/fa';
 import kebabCase from 'lodash.kebabcase';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import duotoneLight from 'prism-react-renderer/themes/duotoneLight';
 
 const baseHeadingStyle = css`
   position: relative;
@@ -106,14 +108,44 @@ const BQ = props => (
   </blockquote>
 );
 
-// const MyParagraph = props => <p style={{ fontSize: '18px', lineHeight: 1.6 }} />
+const Code = ({ children, className }) => {
+  const language = className.replace(/language-/, '');
+  return (
+    <Highlight
+      {...defaultProps}
+      code={children}
+      language={language}
+      theme={{ ...duotoneLight, plain: { backgroundColor: '#f2f2f2' } }}
+    >
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre
+          className={className}
+          style={{ ...style, padding: '20px', fontFamily: 'Inconsolata' }}
+        >
+          {tokens.map((line, i) => {
+            if (i < tokens.length - 1)
+              return (
+                <div key={i} {...getLineProps({ line, key: i })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </div>
+              );
+          })}
+        </pre>
+      )}
+    </Highlight>
+  );
+};
 
 const overrides = {
   h1: H1,
   h2: H2,
   h3: H3,
   h4: H4,
-  blockquote: BQ
+  blockquote: BQ,
+  pre: props => <div {...props} />,
+  code: Code
 };
 
 export default overrides;
