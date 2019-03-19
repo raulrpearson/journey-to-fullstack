@@ -1,7 +1,7 @@
 import Typography from 'typography';
 
 const typography = new Typography({
-  baseFontSize: '18px',
+  baseFontSize: '16px',
   baseLineHeight: 1.666,
   headerFontFamily: [
     'Avenir Next',
@@ -11,7 +11,7 @@ const typography = new Typography({
     'Arial',
     'sans-serif'
   ],
-  bodyFontFamily: ['Georgia', 'serif'],
+  bodyFontFamily: ['Avenir Next', 'serif'],
   googleFonts: [
     {
       name: 'Inconsolata',

@@ -40,8 +40,11 @@ const StyledLayout = styled.div`
 
 const StyledArticle = styled.article`
   min-width: 100px;
-  max-width: 100%;
   justify-self: center;
+
+  & > div {
+    max-width: 600px;
+  }
 `;
 
 const Menu = styled.div`
