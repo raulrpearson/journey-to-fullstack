@@ -131,14 +131,15 @@ const Code = ({ children, className }) => {
             }}
           >
             {tokens.map((line, i) => {
-              if (i < tokens.length - 1)
-                return (
-                  <div key={i} {...getLineProps({ line, key: i })}>
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
-                  </div>
-                );
+              // A bit of a hack to avoid rendering the last empty line
+              if (i === tokens.length - 1) return null;
+              return (
+                <div key={i} {...getLineProps({ line, key: i })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </div>
+              );
             })}
           </pre>
         </>
