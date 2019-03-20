@@ -431,7 +431,7 @@ function leftPad(str, length = 20) {
 
 - `padStart` and `padEnd` is even better for that.
 
-### Destructuring
+### De-structuring
 
 ```javascript
 // Assigning values to custom named variables
@@ -546,3 +546,46 @@ const tShirt = {
 ### Sets
 
 ### Maps
+
+## JS Algorithms And Data Structures Certification
+
+Notes from following freeCodeCamp's JS algorithms and data structures cert.
+
+### Basic JavaScript
+
+- Check out the assortment of [assignment
+  operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Assignment_Operators#Overview).
+  I typically only use `+=` and never think of using the rest!
+
+- Characters in string are immutable. The strings themselves are not. So you can
+  change the value of a whole string (`s = 'new value'`), you can read single
+  characters with brackets notation (`let t = s[2]`), but you cannot change a single
+  character in an existing string (`s[2] = 'a' // not!`).
+
+- Become more fluent with [array
+  methods](https://javascript.info/array-methods#summary): `push`, `pop`, `shift`,
+  `unshift`, `splice`, `slice`, `concat`, `forEach`, `indexOf`, `lastIndexOf`,
+  `includes`, `find`, `findIndex`, `filter`, `map`, `sort`, `reverse`, `split`,
+  `join`, `reduce`, `reduceRight`, `isArray`.
+
+- Assigning a value to an undeclared variable [implicitly creates
+  it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#Description)
+  as a global variable (it becomes a property of the global object) when the
+  assignment is executed. The differences between declared and undeclared
+  variables are:
+
+  1. Declared variables are constrained in the execution context in which they
+     are declared. Undeclared variables are always global.
+
+  2. Declared variables are created before any code is executed. Undeclared
+     variables do not exist until the code assigning to them is executed.
+
+  3. Declared variables are a non-configurable property of their execution context
+     (function or global). Undeclared variables are configurable (e.g. can be
+     deleted).
+
+- Study scopes.
+
+- Understand coercion and different behavior between `==` vs `===` and `!=` `!==`.
+
+- Review [`switch` syntax and patterns](https://javascript.info/switch).
