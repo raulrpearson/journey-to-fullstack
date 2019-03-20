@@ -18,6 +18,10 @@ const colorsDictionary = {
     color: 'inherit',
     backgroundColor: '#00d8ff'
   },
+  shell: {
+    color: 'inherit',
+    backgroundColor: '#dddddd'
+  }
   default: {
     color: 'inherit',
     backgroundColor: '#829ec2'
