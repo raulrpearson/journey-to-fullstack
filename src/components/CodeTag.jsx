@@ -21,7 +21,7 @@ const colorsDictionary = {
   shell: {
     color: 'inherit',
     backgroundColor: '#dddddd'
-  }
+  },
   default: {
     color: 'inherit',
     backgroundColor: '#829ec2'
