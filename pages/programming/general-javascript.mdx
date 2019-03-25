@@ -6,12 +6,21 @@ title: 'General Javascript'
 
 # General JavaScript
 
+## Resources
+
 - ECMAScript [compatibility table](https://kangax.github.io/compat-table/es6/)
 - [2ality](http://2ality.com/)
 - [javascript.info](https://javascript.info/)
+- [Eloquent JavaScript](https://eloquentjavascript.net/)
+- [Fun Fun
+  Function](https://www.youtube.com/channel/UCO1cgjhGzsSYb1rsB4bFe4Q/videos)
+  YouTube channel.
 - [List of
   resources](https://levelup.gitconnected.com/how-to-learn-javascript-839fa03745c8?gi=4a8a38e6cf18)
   by Emma Wedekind.
+
+## ToDos
+
 - Learn about relative performance of different object and array operations.
 - Learn how to find and fix bottlenecks in code and articulate tradeoffs between
   different options
@@ -24,6 +33,9 @@ title: 'General Javascript'
 - Take a utility library like lodash and implement some methods and compare your
   solutions in terms of performance, understand what edge cases you need to
   handle
+- Deepen understanding of ES Modules and CommonJS imports and exports. Check out
+  [Flavio's article](https://flaviocopes.com/es-modules/) and [Exploring JS's
+  chapter](http://exploringjs.com/es6/ch_modules.html).
 
 ## Functional JavaScript
 
@@ -559,7 +571,7 @@ Notes from following freeCodeCamp's JS algorithms and data structures cert.
 
 - Characters in string are immutable. The strings themselves are not. So you can
   change the value of a whole string (`s = 'new value'`), you can read single
-  characters with brackets notation (`let t = s[2]`), but you cannot change a single
+  characters with bracket notation (`let t = s[2]`), but you cannot change a single
   character in an existing string (`s[2] = 'a' // not!`).
 
 - Become more fluent with [array
@@ -589,3 +601,117 @@ Notes from following freeCodeCamp's JS algorithms and data structures cert.
 - Understand coercion and different behavior between `==` vs `===` and `!=` `!==`.
 
 - Review [`switch` syntax and patterns](https://javascript.info/switch).
+
+### ES6
+
+- It seems that `'use strict';` at the top of your files or the start of
+  functions is recommended. It's rather annoying to have to write that every time,
+  don't you think? Javascript.info has a good succinct [article on how to use
+  strict mode](https://javascript.info/strict-mode).
+
+  I've also found some recommendations warning that if your code is processed by
+  some build system (minification, concatenation...), you might have unexpected
+  results when mixing strict and sloppy scripts. One solution is to `'use strict';` at the [start of
+  functions](https://www.geeksforgeeks.org/strict-mode-javascript/). Another
+  problem to consider is that if your code is executed in older browsers, they
+  might not support strict mode and you might get unexpected results as well.
+  Preventing problems in this scenario would require careful testing.
+
+- In JavaScript, [`const` does not mean
+  constant](https://mariusschulz.com/blog/constant-variables-in-javascript-or-when-const-isnt-constant),
+  but one-time assignment. **But**, the part that's constant is the reference to
+  an object stored within the constant variable, not the object itself.
+
+  ```javascript
+  const settings = {
+    baseUrl: 'https://example.com'
+  };
+
+  settings = {}; // fail!
+  settings.baseUrl = 'https://evil.example.com'; // win!
+  ```
+
+  <!-- TODO: spacing between this code block and the next paragraph is not good -->
+
+  Declaring a variable to be constant doesn't make the objects it references
+  immutable. Object properties can change or be deleted altogether. The same
+  goes for arrays assigned to a constant variable; Elements can be added,
+  removed, reordered, or modified.
+
+  To make an object truly immutable, you can pass it to the
+  [`Object.freeze`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
+  function to prevent any changes to its properties. Be aware that freeze is
+  shallow, so you'll have to recursively call it for nested objects if you want
+  the entire object tree to be frozen. If you need immutable data structures, it
+  might be safer and more convenient to use a library such as Facebook's
+  [Immutable.js](https://facebook.github.io/immutable-js/) which is specifically
+  made for this purpose.
+
+- An [arrow function
+  expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+  is a syntactically compact alternative to a regular function expression,
+  although without its own bindings to the this, arguments, super, or new.target
+  keywords.
+
+  Arrow function expressions are ill suited as methods, and they cannot be used
+  as constructors. Arrow functions are always anonymous. Two factors influenced
+  the introduction of arrow functions: shorter functions and non-binding of
+  this. An arrow function does not have its own `this`; the `this` value of the
+  enclosing execution context is used.
+
+- Functions that operate on other functions, either by taking them as arguments
+  or by returning them, are called higher-order functions. Eloquent JavaScript has
+  a great article on [higher-order
+  functions](https://eloquentjavascript.net/05_higher_order.html).
+
+- I always forget that I can declare function parameters with default values.
+  Default function parameters allow named parameters to be initialized with
+  default values if no value or `undefined` is passed:
+
+  ```javascript
+  function multiply(a, b = 1) {
+    return a * b;
+  }
+  ```
+
+- I use [destructuring
+  assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+  regularly, but I rarely reach out for new names and default values:
+
+  ```javascript
+  let o = { p: 42, q: true };
+  let { p, q } = o; // basic
+  let { p: foo, q: bar } = o; // new names
+  let { q = false, r = 'hi' } = o; // default values
+  let { p: foo = 1, q, r: bar = 'hi' } = o; // combined
+  ```
+
+- I haven't written much code using classes in JavaScript. [JavaScript
+  classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes),
+  introduced in ECMAScript 2015, are primarily syntactical sugar over JavaScript's
+  existing prototype-based inheritance. The class syntax does not introduce a new
+  object-oriented inheritance model to JavaScript. JavaScript.info [article on
+  classes](https://javascript.info/class) is quite good.
+
+  In summary, the basic class syntax looks like this:
+
+  ```javascript
+  class MyClass {
+    prop = value;
+
+    constructor(...) {
+      // ...
+    }
+
+    method(...) {}
+
+    get something(...) {}
+    set something(...) {}
+
+    [Symbol.iterator]() {}
+    // ...
+  }
+  ```
+
+  `MyClass` is technically a function. Methods are written to
+  `MyClass.prototype`.
