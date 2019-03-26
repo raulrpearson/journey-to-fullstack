@@ -27,11 +27,13 @@ const PageToc = ({ headings }) => (
   <StyledAside id="page-toc">
     <h4>IN THIS ARTICLE</h4>
     <StyledList>
-      {headings.map(h => (
-        <li key={h.url}>
-          <a href={h.url}>{h.title}</a>
-        </li>
-      ))}
+      {headings
+        .filter(h => h.depth == 2)
+        .map(h => (
+          <li key={h.url}>
+            <a href={h.url}>{h.title}</a>
+          </li>
+        ))}
     </StyledList>
   </StyledAside>
 );

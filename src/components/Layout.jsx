@@ -85,9 +85,11 @@ class PageTemplate extends React.Component {
   }
 
   render() {
-    const pageTocEntries = this.props.data.mdx.headings.map(entry => {
-      return { url: `#${kebabCase(entry.value)}`, title: entry.value };
-    });
+    const pageTocEntries = this.props.data.mdx.headings.map(entry => ({
+      url: `#${kebabCase(entry.value)}`,
+      title: entry.value,
+      depth: entry.depth
+    }));
     return (
       <MDXProvider components={overrides}>
         <GlobalStyles />
