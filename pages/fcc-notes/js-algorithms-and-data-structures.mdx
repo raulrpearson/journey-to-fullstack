@@ -2,11 +2,11 @@
 title: freeCodeCamp's JS Algorithms and Data Structures
 ---
 
-## JS Algorithms And Data Structures Certification
+# JS Algorithms And Data Structures Certification
 
 Notes from following freeCodeCamp's JS algorithms and data structures cert.
 
-### Basic JavaScript
+## Basic JavaScript
 
 - Check out the assortment of [assignment
   operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Assignment_Operators#Overview).
@@ -45,7 +45,7 @@ Notes from following freeCodeCamp's JS algorithms and data structures cert.
 
 - Review [`switch` syntax and patterns](https://javascript.info/switch).
 
-### ES6
+## ES6
 
 - It seems that `'use strict';` at the top of your files or the start of
   functions is recommended. It's rather annoying to have to write that every time,
@@ -158,3 +158,62 @@ Notes from following freeCodeCamp's JS algorithms and data structures cert.
 
   `MyClass` is technically a function. Methods are written to
   `MyClass.prototype`.
+
+## Regular Expressions
+
+- Use regular expressions with many methods. [Popular
+  ones](https://javascript.info/regexp-methods#recipes) are:
+
+  - `str.match(regExp)`
+  - `regExp.test(str)`
+  - `str.replace(regExp, newStr|fun)`
+
+- Match literals like this `/hello/`
+
+- Provide alternatives like this `/yes|no|maybe/`
+
+- Flags go at the end of the regular expression like this `/regex/flags`.
+  The two most popular flags are: `i` for case insensitive search and `g` for
+  global search.
+
+- `.` matches any character except newline, but can be made to include newline
+  with the `s` flag.
+
+- Use square brackets to define character sets: `/[abc]/` would be equivalent to
+  `/a|b|c/`, if I'm not mistaken. Use `-` to define ranges. Use `[^...]` to
+  define a character set by specifying its complement. I.e. `[^abc]` matches
+  everything _except_ `a`, `b` or `c`.
+
+- For frequently used character sets, shorthand _character classes_ exist. The
+  most popular:
+
+  - `\w` equivalent to `[A-Za-z0-9_]` and `\W` its complement
+  - `\d` equivalent to `[0-9]` and `\D` its complement
+  - `\s` equivalent to `[ \r\t\f\n\v]` and `\S` its complement.
+
+- Quantifiers establish whether a given character or group can repeat itself:
+
+  - `?` 0 or 1 times
+  - `*` 0 or more times
+  - `+` 1 or more times
+  - `{n}` exactly n times
+  - `{min,max}` a number of times in between min and max (inclusive). Either min
+    or max can be omitted.
+
+- `^` at the beginning of the regular expression denotes beginning of string.
+  `$` at the end denotes end of string.
+
+- Lookaheads establish an extra condition without becoming part of the match.
+  Positive lookahead `x(?=y)` matches `x` when followed by `y`. Negative lookahead
+  `x(?!y)` matches `x` when _not_ followed by `y`.
+
+- Note that `^` and `?` mean different things depending on where they're used.
+
+- By default, regular expressions behave in a _greedy_ manner. For example,
+  `/t[a-z]*i/` applied to `"titanic"` will produce the biggest match,
+  `"titani"`. By adding a question mark like so `/t[a-z]*?i/`, the match behaves
+  in a lazy manner and the smallest match is returned `"ti"`.
+
+- Create capture groups by using parenthesis `(...)`, which can be referenced
+  subsequently inside the regular expression by number `\1`, `\2`, etc. They can
+  also be referenced in `replace` like so `$1`, `$2`, etc.
