@@ -28,7 +28,7 @@ const PageToc = ({ headings }) => (
     <h4>IN THIS ARTICLE</h4>
     <StyledList>
       {headings
-        .filter(h => h.depth == 2)
+        .filter(h => h.depth === 2)
         .map(h => (
           <li key={h.url}>
             <a href={h.url}>{h.title}</a>
