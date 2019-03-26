@@ -17,7 +17,7 @@ const StyledLayout = styled.div`
   display: grid;
   width: 100vw;
   box-sizing: border-box;
-  grid-template-columns: max-content auto max-content;
+  grid-template-columns: 25ch auto 25ch;
   gap: 1em;
   margin: 0;
 
@@ -26,7 +26,7 @@ const StyledLayout = styled.div`
   }
 
   @media (max-width: 1100px) {
-    grid-template-columns: max-content 1fr;
+    grid-template-columns: 25ch 1fr;
 
     & > aside#page-toc {
       display: none;
