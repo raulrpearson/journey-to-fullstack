@@ -224,3 +224,63 @@ Notes from following freeCodeCamp's JS algorithms and data structures cert.
   - syntax errors that prevent a program from running,
   - runtime errors when code fails to execute or has unexpected behavior, and
   - semantic (or logical) errors when code doesn't do what it's meant to.
+
+## Object Oriented Programming
+
+- An object is just a data structure that holds property/value pairs. The values
+  can be of any arbitrary type: strings, numbers, objects... When a property has a
+  value of type Function, we call it a method.
+
+- Constructors are functions that create new objects. They follow a few
+  conventions:
+
+  - They are defined with a capitalized name to distinguish them from other
+    functions that are not constructors.
+
+  - They use the keyword `this` to set properties of the object they will
+    create. Inside the constructor, `this` refers to the new object it will
+    create.
+
+  - They define properties and behaviors instead of returning a value as other
+    functions might.
+
+- You can use `obj instanceof Obj` to test if a specific `obj` object is an
+  instance of the `Obj` constructor.
+
+- An object has two types of properties: _own_ properties and _prototype_
+  properties. Own properties are defined directly on the object instance itself.
+  And prototype properties are defined on the prototype. `.hasOwnProperties(key)`
+  returns `false` for prototype properties, but the `in` operator works with
+  both. But it's more complicated, so check [Enumerability and ownership of
+  properties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)
+
+  > Enumerable properties are those properties whose internal enumerable flag is
+  > set to true, which is the default for properties created via simple assignment
+  > or via a property initializer (properties defined via Object.defineProperty
+  > and such default enumerable to false). Enumerable properties show up in
+  > for...in loops unless the property's key is a Symbol. Ownership of properties
+  > is determined by whether the property belongs to the object directly and not
+  > to its prototype chain. Properties of an object can also be retrieved in
+  > total.
+
+- Manually setting the prototype of a new object will erase (overwrite, I guess)
+  the constructor property. One solution is to include the constructor in the
+  object literal we're using to overwrite `prototype`.
+
+  ```javascript
+  function Dog(name) {
+    this.name = name;
+  }
+
+  // Modify the code below this line
+  Dog.prototype = {
+    constructor: Dog,
+    numLegs: 2,
+    eat: function() {
+      console.log('nom nom nom');
+    },
+    describe: function() {
+      console.log('My name is ' + this.name);
+    }
+  };
+  ```
