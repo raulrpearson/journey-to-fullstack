@@ -284,3 +284,47 @@ Notes from following freeCodeCamp's JS algorithms and data structures cert.
     }
   };
   ```
+
+## Functional programming
+
+- Functional programming is about:
+
+  - Isolated functions - there is no dependence on the state of the program,
+    which includes global variables that are subject to change
+
+  - Pure functions - the same input always gives the same output
+
+  - Functions with limited side effects - any changes, or mutations, to the
+    state of the program outside the function are carefully controlled
+
+- Functions passed as arguments are referred to as _callbacks_.
+
+- Functions that can be assigned to a variable, passed into another function, or
+  returned from another function just like any other normal value, are called
+  _first class_ functions. All functions are first class in JavaScript.
+
+- Functions that take functions as arguments or return functions are called
+  _higher order_ functions. The functions that are passed as arguments or
+  returned as results are called _lambdas_.
+
+- In functional programming, changing or altering things is called _mutation_,
+  and the outcome is called a _side effect_. A function, ideally, should be a
+  _pure function_, meaning that it does not cause any side effects.
+
+- Another principle of functional programming is to always declare your
+  dependencies explicitly. This means if a function depends on a variable or
+  object being present, then pass that variable or object directly into the
+  function as an argument.
+
+- `reduce` caveat: the first time the callback is called, `accumulator` and
+  `currentValue` can be one of two values. If `initialValue` is provided in the call
+  to `reduce()`, then `accumulator` will be equal to `initialValue`, and `currentValue`
+  will be equal to the first value in the array. If no `initialValue` is provided,
+  then `accumulator` will be equal to the first value in the array, and `currentValue`
+  will be equal to the second.
+
+- Check out the
+  [`every`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
+  and
+  [`some`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
+  methods!
