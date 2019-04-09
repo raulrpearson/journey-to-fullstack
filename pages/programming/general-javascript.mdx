@@ -83,6 +83,36 @@ title: 'General Javascript'
   values are `false`, `0`, `""`, `null`, `undefined` and `NaN`. Truthy values
   are all the rest. JavaScript coerces values to Boolean in Boolean contexts.
 
+### `this`
+
+I just came across a situation I wasn't expecting with a code snippet like this
+one:
+
+```javascript
+let instance = new Something();
+document.addEventListener('click', instance.method);
+```
+
+It turns out that when using references to functions (`method` is a function),
+they become unbound to `this`. In the case of passing them as callbacks in
+`addEventListener`, they also become bound to the event target. This means that
+any `this.property` code you were using in the body of the method might not
+behave as you expected it to do - because of the rebinding, `this` no longer
+refers to `instance` but to `document`.
+
+This can be solved like so:
+
+```javascript
+let instance = new Something();
+document.addEventListener('click', instance.method.bind(instance)); // boom!
+```
+
+I found a couple of videos by Zac Gordon quite helpful: ["An Introduction to
+"this" keyword in JavaScript"](https://www.youtube.com/watch?v=2qMKjWf1KdE),
+["Binding "this" in JavaScript"](https://www.youtube.com/watch?v=73aAyap_88w)
+and ["An Example of Binding "this" in JavaScript with
+addEventListener()"](https://www.youtube.com/watch?v=sxRnmKldiBs).
+
 ### Closures and scope
 
 A [closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) is
