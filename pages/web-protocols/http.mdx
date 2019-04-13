@@ -1,0 +1,44 @@
+## HTTP
+
+### How does HTTP work?
+
+The best resource I found is this Quora answer to [How does HTTP
+work?](https://www.quora.com/How-does-HTTP-work/answer/Charles-Knouse-2). In
+summary, when you input a URL into your browser's location bar and press enter,
+this is typically and loosely what happens:
+
+- Using DNS, the [URL](https://en.wikipedia.org/wiki/URL) is resolved into an IP
+  address.
+
+- A TCP connection is established with the web server answering at that IP
+  address. Alternatively, a TLS-encrypted TCP connection is established if using
+  HTTPS.
+
+- HTTP messages are exchanged, the browser sends _requests_ and the server sends
+  back _responses_. It starts with a GET request for the document referenced by
+  the URL but many more request/response pairs are exchanged to load all of the
+  different resources that make up a particular web page.
+
+### References
+
+- [HTTP on MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP)
+
+### How do browsers render web pages?
+
+- Tali Garsiel and Paul Irish's famous [How Browswers
+  Work](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/) give
+  some details about the way browsers process the HTTP responses to render a
+  particular web page.
+
+- The video [How do web browsers work? | Web Demystified, Episode
+  5](https://www.youtube.com/watch?v=uE3UPEK26U0) is an easy watch and gives a
+  nice overview.
+
+### Exercises
+
+- Add details of the [HTTP request
+  methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) to your
+  [spaced repetition system](https://apps.ankiweb.net/).
+
+- Build a low level library that is able to compose and send HTTP requests and
+  spit out HTTP responses.
