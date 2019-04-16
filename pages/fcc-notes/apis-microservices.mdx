@@ -1,0 +1,42 @@
+---
+title: freeCodeCamp's APIs and Microservices Certification
+---
+
+# APIs and Microservices Certification
+
+This are my notes. They're not meant to be exhaustive, just to include the
+things that I found new or interesting.
+
+## Managing packages with NPM
+
+- Use `~` tilde to allow patch version updates. Use `^` caret to allow minor
+  (and patch) version updates. Since minor versions shouldn't break API, using
+  caret is the default behavior when installing packages.
+
+## Basic Node and Express
+
+- Express provides routing capabilities like so `app.METHOD(PATH, HANDLER)`. For
+  example: `app.get('/', (req, res) => res.send('Hi!'))`
+
+- In Node.js,
+  [`__dirname`](https://nodejs.org/docs/latest/api/modules.html#modules_dirname)
+  is the directory name of the current module. It's required for example with
+  `res.sendFile`.
+
+- In Express, you add middleware with `app.use(...)`. Middleware functions
+  intercept requests at specified routes in order to introduce some desired
+  processing or side-effects.
+
+- An interesting middleware is `express.static(<path>)` to serve static assets
+  on a given path.
+
+- Middleware functions take 3 arguments: the request object, the response
+  object, and the next function in the application’s request-response cycle.
+
+- Middleware can be mounted on a specific route and can also be chained within a
+  route definition.
+
+- Use `req.params` and `req.query` for input taken out of the URL.
+
+- A syntax that allows you to chain different verb handlers on the same path
+  route: `app.route(<path>).get(<handler>).post(<handler>)`
