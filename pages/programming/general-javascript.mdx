@@ -40,6 +40,8 @@ title: 'General Javascript'
 - Deepen understanding of ES Modules and CommonJS imports and exports. Check out
   [Flavio's article](https://flaviocopes.com/es-modules/) and [Exploring JS's
   chapter](http://exploringjs.com/es6/ch_modules.html).
+- Understand [pitfalls of
+  recursion](https://www.thecodingdelight.com/understanding-recursion-javascript/).
 
 ## Functional JavaScript
 
@@ -592,3 +594,29 @@ const tShirt = {
 ### Sets
 
 ### Maps
+
+### Least Common Multiple and Greatest Common Divisor
+
+The GCD can be computed using Euclid's algorithm. GCM is associative, which
+means `GCD(a,b,c) === GCD(GCD(a,b), c)`.
+
+```javascript
+function gcd(a, b, ...rest) {
+  let numbers = [a, b, ...rest];
+  return numbers.reduce((acc, cur) => (!cur ? acc : gcd(cur, acc % cur)));
+}
+```
+
+The LCM can be computed from the GCD:
+
+```javascript
+function lcm(a, b, ...rest) {
+  let numbers = [a, b, ...rest];
+  return numbers.reduce((acc, cur) => {
+    if (acc === 0 && cur === 0) return 0;
+    return (acc / gcd(acc, cur)) * cur;
+  });
+}
+```
+
+The Nth common multiple can be calculated like `N * lcm`.
