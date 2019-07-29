@@ -23,7 +23,7 @@ module.exports = {
     },
     'gatsby-plugin-emotion',
     {
-      resolve: 'gatsby-mdx',
+      resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx', '.md'],
         // defaultLayout: require.resolve('./src/components/Layout.jsx'),

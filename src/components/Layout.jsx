@@ -1,6 +1,6 @@
 import React from 'react';
-import { MDXProvider } from '@mdx-js/tag';
-import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { MDXProvider } from '@mdx-js/react';
+import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer';
 import styled from '@emotion/styled';
 import { Global, css } from '@emotion/core';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -115,7 +115,7 @@ class PageTemplate extends React.Component {
               `
             }
           >
-            <MDXRenderer>{this.props.data.mdx.code.body}</MDXRenderer>
+            <MDXRenderer>{this.props.data.mdx.body}</MDXRenderer>
           </StyledArticle>
           <PageToc headings={pageTocEntries} />
         </StyledLayout>
@@ -139,9 +139,7 @@ export const pageQuery = graphql`
         title
         slug
       }
-      code {
-        body
-      }
+      body
       headings {
         value
         depth
